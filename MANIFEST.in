@@ -1,0 +1,2 @@
+include versioneer.py
+include data_structures/_version.py
