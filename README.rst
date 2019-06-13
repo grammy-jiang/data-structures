@@ -30,3 +30,17 @@ Queue_
 Wikipedia: `https://en.wikipedia.org/wiki/Queue_(abstract_data_type)`
 
 .. _Queue: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
+
+Set_
+====
+
+Wikipedia: `https://en.wikipedia.org/wiki/Set_(abstract_data_type)`
+
+.. _Set: https://en.wikipedia.org/wiki/Set_(abstract_data_type)
+
+`Hash Table`_
+===========
+
+Wikipedia: https://en.wikipedia.org/wiki/Hash_table
+
+.. _`Hash Table`: https://en.wikipedia.org/wiki/Hash_table
