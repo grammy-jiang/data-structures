@@ -1,0 +1,3 @@
+[run]
+omit =
+    data_structures/_version.py

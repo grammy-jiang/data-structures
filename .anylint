@@ -1,0 +1,6 @@
+{
+   "ignore":[
+      "data_structures/_version.py",
+      "versioneer.py"
+   ]
+}

@@ -1,0 +1,5 @@
+exclude_paths:
+  - '.github/**'
+  - 'data_structures/_version.py'
+  - 'tests/**'
+  - 'versioneer.py'
