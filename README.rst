@@ -16,3 +16,17 @@ The data structures' properties and methods are highly referred to their descrip
 Wikipedia: https://en.wikipedia.org/wiki/Linked_list
 
 .. _`Linked List`: https://en.wikipedia.org/wiki/Linked_list
+
+Stack_
+======
+
+Wikipedia: `https://en.wikipedia.org/wiki/Stack_(abstract_data_type)`
+
+.. _Stack: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+
+Queue_
+======
+
+Wikipedia: `https://en.wikipedia.org/wiki/Queue_(abstract_data_type)`
+
+.. _Queue: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
