@@ -8,6 +8,6 @@ Python Data Structures
 
 This repository contains the common data structures written in Python.
 
-The data structures' properties and methods are highly referred to their descriptions on wikipedia.
+The data structures' properties and methods are highly referred to their descriptions on wikipedia_.
 
-More data structures: https://en.wikipedia.org/wiki/List_of_data_structures
+.. _wikipedia: https://en.wikipedia.org/wiki/List_of_data_structures
