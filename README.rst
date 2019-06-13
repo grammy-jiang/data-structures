@@ -39,8 +39,29 @@ Wikipedia: `https://en.wikipedia.org/wiki/Set_(abstract_data_type)`
 .. _Set: https://en.wikipedia.org/wiki/Set_(abstract_data_type)
 
 `Hash Table`_
-===========
+=============
 
 Wikipedia: https://en.wikipedia.org/wiki/Hash_table
 
 .. _`Hash Table`: https://en.wikipedia.org/wiki/Hash_table
+
+Tree_
+=====
+
+Wikipedia: `https://en.wikipedia.org/wiki/Tree_(data_structure)`
+
+.. _Tree: https://en.wikipedia.org/wiki/Tree_(data_structure)
+
+Heap_
+=====
+
+Wikipedia: `https://en.wikipedia.org/wiki/Heap_(data_structure)`
+
+.. _Heap: https://en.wikipedia.org/wiki/Heap_(data_structure)
+
+Graph_
+======
+
+Wikipedia: `https://en.wikipedia.org/wiki/Graph_(abstract_data_type)`
+
+.. _Graph: https://en.wikipedia.org/wiki/Graph_(abstract_data_type)
