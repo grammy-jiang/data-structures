@@ -59,6 +59,13 @@ Wikipedia: `https://en.wikipedia.org/wiki/Heap_(data_structure)`
 
 .. _Heap: https://en.wikipedia.org/wiki/Heap_(data_structure)
 
+`Priority Queue`_
+=================
+
+Wikipedia: https://en.wikipedia.org/wiki/Priority_queue
+
+.. _`Priority Queue`: https://en.wikipedia.org/wiki/Priority_queue
+
 Graph_
 ======
 
