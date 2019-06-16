@@ -35,3 +35,8 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertFalse(bool(singly_linked_list))
+
+    def test_iter(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        for node, value in zip(singly_linked_list, self.node_values):
+            self.assertIs(node.value, value)
