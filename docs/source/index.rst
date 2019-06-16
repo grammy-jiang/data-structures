@@ -10,7 +10,7 @@ Welcome to Python Data Structures's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   linked_list/node
 
 Indices and tables
 ==================
