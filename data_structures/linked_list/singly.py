@@ -62,6 +62,20 @@ class SinglyLinkedList:
         """
         return self.head is not None
 
+    def __contains__(self, node: Node) -> bool:
+        """
+
+        :param node:
+        :type node: Node
+        :return:
+        :rtype: bool
+        """
+        for _node in self:
+            if node is _node:
+                return True
+        else:
+            return False
+
     def __iter__(self) -> SinglyLinkedListIterator:
         """
 
