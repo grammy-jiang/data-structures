@@ -68,3 +68,10 @@ class TestSinglyLinkedList(TestCase):
         self.assertIsInstance(reversed_singly_linked_list, Iterator)
         for node, i in zip(reversed_singly_linked_list, reversed(self.node_values)):
             self.assertIs(node.value, i)
+
+    def test_tail(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        self.assertIs(singly_linked_list.tail.value, self.node_values[-1])
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertIsNone(singly_linked_list.tail)

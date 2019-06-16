@@ -126,3 +126,23 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :rtype: SinglyLinkedListReversedIterator
         """
         return SinglyLinkedListReversedIterator(self)
+
+    @property
+    def tail(self):
+        """
+        Because this property has a getter method, this block is empty
+        """
+
+    @tail.getter
+    def tail(self) -> Optional[Node]:
+        """
+        The tail node of this singly linked list
+
+        :return:
+        :rtype: Optional[Node]
+        """
+        node: Optional[Node] = None
+        for node in self:
+            pass
+        else:
+            return node
