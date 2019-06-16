@@ -75,3 +75,21 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertIsNone(singly_linked_list.tail)
+
+    def test_is_head(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+
+        node_a = singly_linked_list.head
+        self.assertTrue(singly_linked_list.is_head(node_a))
+
+        node_f = Node("f")
+        self.assertFalse(singly_linked_list.is_head(node_f))
+
+    def test_is_tail(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        node_a: Optional[Node] = singly_linked_list.head
+        node_b: Optional[Node] = node_a.next
+        node_c: Optional[Node] = node_b.next
+        self.assertTrue(singly_linked_list.is_tail(node_c))
+        self.assertFalse(singly_linked_list.is_tail(node_b))
+

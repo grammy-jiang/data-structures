@@ -146,3 +146,22 @@ class SinglyLinkedList(Container, Reversible, Sized):
             pass
         else:
             return node
+
+    def is_head(self, node: Node) -> bool:
+        """
+        Check if the given node is the head of this singly linked list
+
+        Complexity:
+          - Space: Θ(1), Ο(1), Ω(1)
+          - Time: Θ(1), Ο(1), Ω(1)
+
+        :param node:
+        :type node: Node
+        :return: If the given node is the head of this singly linked list, return True,
+                 otherwise False
+        :rtype: bool
+        """
+        return node is self.head
+
+    def is_tail(self, node: Node) -> bool:
+        return node is self.tail
