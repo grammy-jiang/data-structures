@@ -52,3 +52,10 @@ class TestSinglyLinkedList(TestCase):
 
         for i, node in enumerate(singly_linked_list):
             self.assertIs(self.node_values[i], node.value)
+
+    def test_len(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        self.assertEqual(len(singly_linked_list), len(self.node_values))
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertEqual(len(singly_linked_list), 0)

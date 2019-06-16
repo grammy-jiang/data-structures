@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Container, Iterable, Iterator
+from collections.abc import Container, Iterable, Iterator, Sized
 from typing import Optional
 
 from data_structures.linked_list import Node
@@ -33,7 +33,7 @@ class SinglyLinkedListIterator(Iterator):
             raise StopIteration
 
 
-class SinglyLinkedList(Container, Iterable):
+class SinglyLinkedList(Container, Iterable, Sized):
     """
     This is the simple singly linked list:
 
@@ -83,3 +83,15 @@ class SinglyLinkedList(Container, Iterable):
         :rtype: SinglyLinkedListIterator
         """
         return SinglyLinkedListIterator(self)
+
+    def __len__(self) -> int:
+        """
+
+        :return:
+        :rtype: int
+        """
+        _len = 0
+        for _ in self:
+            _len += 1
+        return _len
+
