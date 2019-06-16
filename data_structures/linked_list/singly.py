@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Container, Iterator, Reversible, Sized
-from typing import Optional
+from typing import Any, Optional
 
 from data_structures.linked_list import Node
 
@@ -165,3 +165,17 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
     def is_tail(self, node: Node) -> bool:
         return node is self.tail
+
+    def search(self, value: Any) -> Optional[Node]:
+        """
+        search for a given value, return immediately when the first node is found
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: Optional[Node]
+        """
+        for node in self:
+            if node.value == value:
+                return node
+        else:
+            return None

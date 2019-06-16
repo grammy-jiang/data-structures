@@ -93,3 +93,14 @@ class TestSinglyLinkedList(TestCase):
         self.assertTrue(singly_linked_list.is_tail(node_c))
         self.assertFalse(singly_linked_list.is_tail(node_b))
 
+    def test_search(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+
+        b = self.node_values[1]
+
+        self.assertIs(singly_linked_list.search(b).value, b)
+
+        self.assertIsNone(singly_linked_list.search("d"))
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertIsNone(singly_linked_list.search("d"))
