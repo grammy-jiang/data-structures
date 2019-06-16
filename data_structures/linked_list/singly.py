@@ -23,3 +23,11 @@ class SinglyLinkedList:
             current_node = self.head
             for i in args[1:]:
                 current_node = Node.after_node(i, current_node)
+
+    def __bool__(self) -> bool:
+        """
+        if this singly linked list is empty return False, otherwise return True
+        :return:
+        :rtype: bool
+        """
+        return self.head is not None

@@ -28,3 +28,10 @@ class TestSinglyLinkedList(TestCase):
 
         with self.assertRaises(AttributeError):
             _ = singly_linked_list.head.next
+
+    def test_bool(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        self.assertTrue(bool(singly_linked_list))
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertFalse(bool(singly_linked_list))
