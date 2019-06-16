@@ -17,10 +17,13 @@ class TestNode(TestCase):
         """
         Test the initialization of Node class
         """
-        node = Node(self.node_value)
+        node_a = Node(self.node_value)
 
-        self.assertIs(node.value, self.node_value)
-        self.assertIsNone(node.next)
+        self.assertIs(node_a.value, self.node_value)
+        self.assertIsNone(node_a.next)
+
+        node_b = Node(self.node_value, node_a)
+        self.assertIs(node_b.next, node_a)
 
     def test_after_node(self) -> None:
         """

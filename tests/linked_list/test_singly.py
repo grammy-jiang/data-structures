@@ -40,3 +40,6 @@ class TestSinglyLinkedList(TestCase):
         singly_linked_list = SinglyLinkedList(*self.node_values)
         for node, value in zip(singly_linked_list, self.node_values):
             self.assertIs(node.value, value)
+
+        for i, node in enumerate(singly_linked_list):
+            self.assertIs(self.node_values[i], node.value)
