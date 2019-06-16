@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Container, Iterable, Iterator, Sized
+from collections.abc import Container, Iterator, Reversible, Sized
 from typing import Optional
 
 from data_structures.linked_list import Node
@@ -33,7 +33,31 @@ class SinglyLinkedListIterator(Iterator):
             raise StopIteration
 
 
-class SinglyLinkedList(Container, Iterable, Sized):
+class SinglyLinkedListReversedIterator(SinglyLinkedListIterator):
+    """
+
+    """
+
+    def __init__(self, singly_linked_list: SinglyLinkedList):
+        """
+
+        :param singly_linked_list:
+        :type singly_linked_list: SinglyLinkedList
+        """
+        super(SinglyLinkedListReversedIterator, self).__init__(singly_linked_list)
+
+        self._reversed_singly_linked_list: SinglyLinkedList = SinglyLinkedList()
+        _: Optional[Node] = None
+        node: Optional[Node] = None
+        for i in self.singly_linked_list:
+            node = Node(i.value)
+            node.next = _
+        else:
+            self._reversed_singly_linked_list.head = node
+            self.current = node
+
+
+class SinglyLinkedList(Container, Reversible, Sized):
     """
     This is the simple singly linked list:
 
@@ -95,3 +119,10 @@ class SinglyLinkedList(Container, Iterable, Sized):
             _len += 1
         return _len
 
+    def __reversed__(self) -> SinglyLinkedListReversedIterator:
+        """
+
+        :return:
+        :rtype: SinglyLinkedListReversedIterator
+        """
+        return SinglyLinkedListReversedIterator(self)

@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
@@ -59,3 +60,11 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertEqual(len(singly_linked_list), 0)
+
+    def test_reserved(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        reversed_singly_linked_list = reversed(singly_linked_list)
+
+        self.assertIsInstance(reversed_singly_linked_list, Iterator)
+        for node, i in zip(reversed_singly_linked_list, reversed(self.node_values)):
+            self.assertIs(node.value, i)
