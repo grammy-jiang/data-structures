@@ -199,6 +199,35 @@ class SinglyLinkedList(Container, Reversible, Sized):
     def is_tail(self, node: Node) -> bool:
         return node is self.tail
 
+    def replace(self, old: Any, new: Any, max: Optional[int] = None) -> None:
+        """
+        In-place replace the node old value with the given new one
+
+        Complexity:
+          - Space: Θ(n), Ο(n), Ω(1)
+          - Time: Θ(n), Ο(n), Ω(1)
+
+        :param old: The old value to be replaced
+        :type old: Any
+        :param new: The new value to replace the old one
+        :type new: Any
+        :param max: if max is not provided all of nodes equaled to old will be changed to new
+        :type max: Optional[int]
+        :return: This method is a in-place change and returns None
+        :rtype: None
+        """
+        for node in self:
+            if max == 0:
+                break
+
+            if node.value == old:
+                node.value = new
+
+            if max is None:
+                continue
+            else:
+                max -= 1
+
     def reverse(self) -> None:
         """
         In-place reverse

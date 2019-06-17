@@ -93,6 +93,28 @@ class TestSinglyLinkedList(TestCase):
         self.assertTrue(singly_linked_list.is_tail(node_c))
         self.assertFalse(singly_linked_list.is_tail(node_b))
 
+    def test_replace(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+
+        self.assertIsNone(singly_linked_list.replace("b", "a"))
+        self.assertIs(singly_linked_list.head.next.value, "a")
+
+        singly_linked_list.replace("a", "b")
+        self.assertIs(singly_linked_list.head.value, "b")
+        self.assertIs(singly_linked_list.head.next.value, "b")
+
+        singly_linked_list.replace("b", "a", 0)
+        self.assertIs(singly_linked_list.head.value, "b")
+
+        singly_linked_list.replace("b", "a", 1)
+        self.assertIs(singly_linked_list.head.value, "a")
+        self.assertIs(singly_linked_list.head.next.value, "b")
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertIsNone(singly_linked_list.replace("a", "b"))
+        self.assertIsNone(singly_linked_list.head)
+        self.assertFalse(bool(singly_linked_list))
+
     def test_reverse(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
         self.assertIsNone(singly_linked_list.reverse())
