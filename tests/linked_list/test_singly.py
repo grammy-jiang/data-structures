@@ -104,3 +104,19 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertIsNone(singly_linked_list.search("d"))
+
+    def test_search_iter(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+
+        search_iter = singly_linked_list.search_iter("b")
+        self.assertIsInstance(search_iter, Iterator)
+        self.assertIs(next(search_iter).value, "b")
+
+        search_iter = singly_linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)
+
+        singly_linked_list = SinglyLinkedList()
+        search_iter = singly_linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)

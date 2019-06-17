@@ -57,6 +57,39 @@ class SinglyLinkedListReversedIterator(SinglyLinkedListIterator):
             self.current = node
 
 
+class SinglyLinkedListSearchIterator(SinglyLinkedListIterator):
+    """
+
+    """
+    def __init__(self, singly_linked_list: SinglyLinkedList, value: Any):
+        """
+
+        :param singly_linked_list:
+        :type singly_linked_list: SinglyLinkedList
+        :param value:
+        :type value: Any
+        """
+        super(SinglyLinkedListSearchIterator, self).__init__(singly_linked_list)
+        self.value = value
+
+    def __next__(self) -> Node:
+        """
+
+        :return:
+        :rtype: Node
+        """
+        while True:
+            current: Optional[Node] = self.current
+            try:
+                self.current = current.next
+            except AttributeError:  # if the singly linked list is empty
+                raise StopIteration
+            if current.value == self.value:
+                return current
+            if current.next is None:
+                raise StopIteration
+
+
 class SinglyLinkedList(Container, Reversible, Sized):
     """
     This is the simple singly linked list:
@@ -179,3 +212,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
                 return node
         else:
             return None
+
+    def search_iter(self, value: Any):
+        """
+        search for a given value, return a generator
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: Generator[Node, None, None]
+        """
+        return SinglyLinkedListSearchIterator(self, value)
