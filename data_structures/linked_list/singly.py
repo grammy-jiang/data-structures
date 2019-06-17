@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Container, Iterator, Reversible, Sized
-from typing import Any, Optional, List, Union
+from typing import Any, List, Optional, Union
 
 from data_structures.linked_list import Node
 
@@ -10,6 +10,7 @@ class SinglyLinkedListIterator(Iterator):
     """
 
     """
+
     def __init__(self, singly_linked_list: SinglyLinkedList):
         """
 
@@ -61,6 +62,7 @@ class SinglyLinkedListSearchIterator(SinglyLinkedListIterator):
     """
 
     """
+
     def __init__(self, singly_linked_list: SinglyLinkedList, value: Any):
         """
 
