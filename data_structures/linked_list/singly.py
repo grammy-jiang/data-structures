@@ -199,6 +199,19 @@ class SinglyLinkedList(Container, Reversible, Sized):
     def is_tail(self, node: Node) -> bool:
         return node is self.tail
 
+    def reverse(self) -> None:
+        """
+        In-place reverse
+        :return:
+        :rtype: None
+        """
+        _ = None
+        node: Optional[Node] = None
+        for node in self:
+            node.next, _ = _, node
+        else:
+            self.head = node
+
     def search(self, value: Any) -> Optional[Node]:
         """
         search for a given value, return immediately when the first node is found
