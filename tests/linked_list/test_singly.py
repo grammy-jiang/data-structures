@@ -75,6 +75,18 @@ class TestSinglyLinkedList(TestCase):
         self.assertEqual(len(singly_linked_list), len(self.node_values) + 1)
         self.assertIs(singly_linked_list.tail.value, "d")
 
+    def test_insert_after(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+
+        node_value = "d"
+        head = singly_linked_list.head
+        singly_linked_list.insert_after(node_value, head)
+        self.assertIs(head.next.value, node_value)
+
+        node_value = "f"
+        singly_linked_list.insert_after(node_value)
+        self.assertIs(singly_linked_list.head.value, node_value)
+
     def test_is_head(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
 
@@ -99,6 +111,25 @@ class TestSinglyLinkedList(TestCase):
         self.assertFalse(singly_linked_list.is_tail(node))
         self.assertIs(singly_linked_list.tail.value, self.node_values[-2])
         self.assertIsNone(singly_linked_list.tail.next)
+
+    def test_remove_after(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        node_1st: Optional[Node] = singly_linked_list.head
+        node_2nd: Optional[Node] = node_1st.next
+        node_3rd: Optional[Node] = node_2nd.next
+        singly_linked_list.remove_after(node_1st)
+        self.assertEqual(len(singly_linked_list), len(self.node_values) - 1)
+        self.assertIs(node_1st.next, node_3rd)
+
+        singly_linked_list.remove_after(node_3rd)
+        self.assertEqual(len(singly_linked_list), len(self.node_values) - 1)
+
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        node_1st = singly_linked_list.head
+        node_2nd = node_1st.next
+        singly_linked_list.remove_after()
+        self.assertEqual(len(singly_linked_list), len(self.node_values) - 1)
+        self.assertTrue(singly_linked_list.is_head(node_2nd))
 
     def test_replace(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
@@ -163,4 +194,3 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertIsNone(singly_linked_list.tail)
-

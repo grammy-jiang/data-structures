@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Container, Iterator, Reversible, Sized
-from typing import Any, Optional, List
+from typing import Any, Optional, List, Union
 
 from data_structures.linked_list import Node
 
@@ -171,6 +171,28 @@ class SinglyLinkedList(Container, Reversible, Sized):
         """
         _ = Node.after_node(value, self.tail)
 
+    def insert_after(
+            self, value: Union[Node, Any], node: Optional[Node] = None
+    ) -> None:
+        """
+        If after_node is not provided, the given value will be insert to the beginning
+        of this singly linked list
+
+        :param value:
+        :type value: Union[Node, Any]
+        :param node:
+        :type node: Optional[Node]
+        :return:
+        :rtype: None
+        """
+        if not isinstance(value, Node):
+            value = Node(value)
+
+        if node:
+            value.next, node.next = node.next, value
+        else:
+            value.next, self.head = self.head, value
+
     def is_head(self, node: Node) -> bool:
         """
         Check if the given node is the head of this singly linked list
@@ -211,6 +233,32 @@ class SinglyLinkedList(Container, Reversible, Sized):
         last_two_nodes[0].next = None
 
         return last_two_nodes[1]
+
+    def remove_after(self, node: Optional[Node] = None) -> None:
+        """
+        Remove one node after the give node
+
+
+        :param node: If after_node is not provided, the first node of this singly linked
+                     list will be removed
+        :type node: Optional[Node]
+        :return:
+        :rtype: None
+        """
+        if not len(self):  # for empty linked list nothing happens
+            return
+
+        if node is None:  # remove the first node
+            self.head = self.head.next
+        else:
+            for n in self:
+                if node is n:
+                    if node.next is None:
+                        # the give node is the last node in singly linked list, nothing
+                        # is removed
+                        return
+                    else:
+                        node.next = node.next.next
 
     def replace(self, old: Any, new: Any, max: Optional[int] = None) -> None:
         """
