@@ -69,12 +69,11 @@ class TestSinglyLinkedList(TestCase):
         for node, i in zip(reversed_singly_linked_list, reversed(self.node_values)):
             self.assertIs(node.value, i)
 
-    def test_tail(self) -> None:
+    def test_append(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
-        self.assertIs(singly_linked_list.tail.value, self.node_values[-1])
-
-        singly_linked_list = SinglyLinkedList()
-        self.assertIsNone(singly_linked_list.tail)
+        self.assertIsNone(singly_linked_list.append("d"))
+        self.assertEqual(len(singly_linked_list), len(self.node_values) + 1)
+        self.assertIs(singly_linked_list.tail.value, "d")
 
     def test_is_head(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
@@ -92,6 +91,14 @@ class TestSinglyLinkedList(TestCase):
         node_c: Optional[Node] = node_b.next
         self.assertTrue(singly_linked_list.is_tail(node_c))
         self.assertFalse(singly_linked_list.is_tail(node_b))
+
+    def test_pop(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        node = singly_linked_list.pop()
+        self.assertIs(node.value, self.node_values[-1])
+        self.assertFalse(singly_linked_list.is_tail(node))
+        self.assertIs(singly_linked_list.tail.value, self.node_values[-2])
+        self.assertIsNone(singly_linked_list.tail.next)
 
     def test_replace(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
@@ -149,3 +156,11 @@ class TestSinglyLinkedList(TestCase):
         search_iter = singly_linked_list.search_iter("d")
         with self.assertRaises(StopIteration):
             _ = next(search_iter)
+
+    def test_tail(self) -> None:
+        singly_linked_list = SinglyLinkedList(*self.node_values)
+        self.assertIs(singly_linked_list.tail.value, self.node_values[-1])
+
+        singly_linked_list = SinglyLinkedList()
+        self.assertIsNone(singly_linked_list.tail)
+

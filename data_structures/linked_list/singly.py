@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Container, Iterator, Reversible, Sized
-from typing import Any, Optional
+from typing import Any, Optional, List
 
 from data_structures.linked_list import Node
 
@@ -160,25 +160,16 @@ class SinglyLinkedList(Container, Reversible, Sized):
         """
         return SinglyLinkedListReversedIterator(self)
 
-    @property
-    def tail(self):
+    def append(self, value: Any) -> None:
         """
-        Because this property has a getter method, this block is empty
-        """
+        Append a node after the tail of this singly linked list
 
-    @tail.getter
-    def tail(self) -> Optional[Node]:
-        """
-        The tail node of this singly linked list
-
+        :param value:
+        :type value: Any
         :return:
-        :rtype: Optional[Node]
+        :rtype: None
         """
-        node: Optional[Node] = None
-        for node in self:
-            pass
-        else:
-            return node
+        _ = Node.after_node(value, self.tail)
 
     def is_head(self, node: Node) -> bool:
         """
@@ -211,6 +202,15 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :rtype: bool
         """
         return node is self.tail
+
+    def pop(self):
+        last_two_nodes: List[Optional[Node], Optional[Node]] = [None, None]
+        for node in self:
+            last_two_nodes = [last_two_nodes[1], node]
+
+        last_two_nodes[0].next = None
+
+        return last_two_nodes[1]
 
     def replace(self, old: Any, new: Any, max: Optional[int] = None) -> None:
         """
@@ -280,3 +280,23 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :rtype: Generator[Node, None, None]
         """
         return SinglyLinkedListSearchIterator(self, value)
+
+    @property
+    def tail(self):
+        """
+        Because this property has a getter method, this block is empty
+        """
+
+    @tail.getter
+    def tail(self) -> Optional[Node]:
+        """
+        The tail node of this singly linked list
+
+        :return:
+        :rtype: Optional[Node]
+        """
+        node: Optional[Node] = None
+        for node in self:
+            pass
+        else:
+            return node
