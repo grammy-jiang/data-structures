@@ -5,7 +5,7 @@ from data_structures.linked_list import DoublyNode
 from data_structures.linked_list.doubly import DoublyLinkedList
 
 
-class TestSinglyLinkedList(TestCase):
+class TestDoublyLinkedList(TestCase):
     def setUp(self) -> None:
         self.node_values = ["a", "b", "c"]
 
