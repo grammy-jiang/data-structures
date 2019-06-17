@@ -4,6 +4,7 @@ The node classes used in various Linked List classes
 from __future__ import annotations
 
 from typing import Any, Optional
+
 from data_structures.exceptions import NodeFrozenError
 
 
@@ -14,6 +15,7 @@ class Node:
 
     Any enhanced Node class should inherit this class
     """
+
     def __init__(self, value: Any, next: Optional[Node] = None):
         """
         Initial a node with the given value, and its `next` property points to the given
@@ -48,6 +50,7 @@ class SecureNode(Node):
     A node with secure mechanism - when it is freezed, the value and next cannot be
     changed
     """
+
     def __init__(self, value: Any, next: Optional[Node] = None, frozen: bool = True):
         """
         Initial a node with secure mechanism, and as default the node is frozen to
@@ -112,3 +115,28 @@ class SecureNode(Node):
         :rtype: None
         """
         self.frozen = False
+
+
+class DoublyNode:
+    """
+    The most simple DoublyNode class, only contains `value` and `next` properties, and
+    there is no any security mechanism for node properties modification
+
+    Any enhanced DoublyNode class should inherit this class
+    """
+
+    def __init__(
+            self,
+            value: Any,
+            previous: Optional[DoublyNode] = None,
+            next: Optional[DoublyNode] = None,
+    ):
+        self.value: Any = value
+
+        self.previous: Optional[DoublyNode] = previous
+        if previous:
+            previous.next = self
+
+        self.next: Optional[DoublyNode] = next
+        if next:
+            next.previous = self

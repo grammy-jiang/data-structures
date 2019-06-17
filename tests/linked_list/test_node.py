@@ -3,14 +3,15 @@ Test Cases for all Node classes
 """
 from unittest import TestCase
 
-from data_structures.linked_list import Node, SecureNode
 from data_structures.exceptions import NodeFrozenError
+from data_structures.linked_list import DoublyNode, Node, SecureNode
 
 
 class TestNode(TestCase):
     """
     The test case for the most simple Node class
     """
+
     def setUp(self) -> None:
         self.node_value = "node value"
 
@@ -75,3 +76,26 @@ class TestSecureNode(TestCase):
 
         self.assertIsNone(node_a.freeze())
         self.assertTrue(node_a.frozen)
+
+
+class TestDoublyNode(TestCase):
+    """
+    The test case for the most simple Node class
+    """
+
+    def setUp(self) -> None:
+        self.node_value = "node value"
+
+    def test_node(self) -> None:
+        """
+        Test the initialization of Node class
+        """
+        node_a = DoublyNode(self.node_value)
+
+        self.assertIs(node_a.value, self.node_value)
+        self.assertIsNone(node_a.previous)
+        self.assertIsNone(node_a.next)
+
+        node_b = DoublyNode(self.node_value, node_a)
+        self.assertIs(node_a.next, node_b)
+        self.assertIs(node_b.previous, node_a)
