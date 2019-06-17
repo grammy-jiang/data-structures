@@ -213,7 +213,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
         else:
             return None
 
-    def search_iter(self, value: Any):
+    def search_iter(self, value: Any) -> SinglyLinkedListSearchIterator:
         """
         search for a given value, return a generator
         :param value:
