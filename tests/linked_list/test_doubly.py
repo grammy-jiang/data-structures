@@ -36,6 +36,15 @@ class TestDoublyLinkedList(TestCase):
         singly_linked_list = DoublyLinkedList()
         self.assertFalse(bool(singly_linked_list))
 
+    def test_contains(self) -> None:
+        singly_linked_list = DoublyLinkedList(*self.node_values)
+
+        node = singly_linked_list.head
+        self.assertIn(node, singly_linked_list)
+
+        node = DoublyNode("e")
+        self.assertNotIn(node, singly_linked_list)
+
     def test_iter(self) -> None:
         doubly_linked_list = DoublyLinkedList(*self.node_values)
         previous = None

@@ -56,6 +56,20 @@ class DoublyLinkedList(Iterable):
         """
         return self.head is not None
 
+    def __contains__(self, node: DoublyNode) -> bool:
+        """
+
+        :param node:
+        :type node: DoublyNode
+        :return:
+        :rtype: bool
+        """
+        for _node in self:
+            if node is _node:
+                return True
+        else:
+            return False
+
     def __iter__(self) -> DoublyLinkedListIterator:
         """
 
