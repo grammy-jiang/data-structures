@@ -16,3 +16,11 @@ class DoublyLinkedList:
             current_node = self.head
             for i in args[1:]:
                 current_node = DoublyNode(i, previous=current_node)
+
+    def __bool__(self) -> bool:
+        """
+        if this doubly linked list is empty return False, otherwise return True
+        :return:
+        :rtype: bool
+        """
+        return self.head is not None

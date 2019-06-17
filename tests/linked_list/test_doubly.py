@@ -28,3 +28,10 @@ class TestSinglyLinkedList(TestCase):
 
         doubly_linked_list = DoublyLinkedList()
         self.assertIsNone(doubly_linked_list.head)
+
+    def test_bool(self) -> None:
+        singly_linked_list = DoublyLinkedList(*self.node_values)
+        self.assertTrue(bool(singly_linked_list))
+
+        singly_linked_list = DoublyLinkedList()
+        self.assertFalse(bool(singly_linked_list))
