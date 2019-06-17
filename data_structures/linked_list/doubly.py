@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator
+from collections.abc import Container, Iterable, Iterator, Sized
 from typing import Optional
 
 from data_structures.linked_list import DoublyNode
@@ -34,7 +34,7 @@ class DoublyLinkedListIterator(Iterator):
             raise StopIteration
 
 
-class DoublyLinkedList(Iterable):
+class DoublyLinkedList(Container, Iterable, Sized):
     def __init__(self, *args):
         """
 
