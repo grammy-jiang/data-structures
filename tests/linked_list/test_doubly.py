@@ -52,3 +52,10 @@ class TestDoublyLinkedList(TestCase):
             self.assertIs(self.node_values[i], node.value)
             self.assertIs(node.previous, previous)
             previous = node
+
+    def test_len(self) -> None:
+        singly_linked_list = DoublyLinkedList(*self.node_values)
+        self.assertEqual(len(singly_linked_list), len(self.node_values))
+
+        singly_linked_list = DoublyLinkedList()
+        self.assertEqual(len(singly_linked_list), 0)
