@@ -197,6 +197,19 @@ class SinglyLinkedList(Container, Reversible, Sized):
         return node is self.head
 
     def is_tail(self, node: Node) -> bool:
+        """
+        Check if the given node is the tail of this singly linked list
+
+        Complexity:
+          - Space: Θ(1), Ο(1), Ω(1)
+          - Time: Θ(1), Ο(1), Ω(1)
+
+        :param node:
+        :type node: Node
+        :return: If the given node is the tail of this singly linked list, return True,
+                 otherwise False
+        :rtype: bool
+        """
         return node is self.tail
 
     def replace(self, old: Any, new: Any, max: Optional[int] = None) -> None:
@@ -231,6 +244,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
     def reverse(self) -> None:
         """
         In-place reverse
+
         :return:
         :rtype: None
         """
@@ -243,7 +257,8 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
     def search(self, value: Any) -> Optional[Node]:
         """
-        search for a given value, return immediately when the first node is found
+        Search for a given value, return immediately when the first node is found
+
         :param value:
         :type value: Any
         :return:
@@ -257,7 +272,8 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
     def search_iter(self, value: Any) -> SinglyLinkedListSearchIterator:
         """
-        search for a given value, return a generator
+        Search for a given value, return a iterator
+
         :param value:
         :type value: Any
         :return:

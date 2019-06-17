@@ -11,6 +11,7 @@ Welcome to Python Data Structures's documentation!
    :caption: Contents:
 
    linked_list/node
+   linked_list/singly
 
 Indices and tables
 ==================
