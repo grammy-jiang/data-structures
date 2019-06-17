@@ -35,3 +35,11 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = DoublyLinkedList()
         self.assertFalse(bool(singly_linked_list))
+
+    def test_iter(self) -> None:
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+        previous = None
+        for i, node in enumerate(doubly_linked_list):
+            self.assertIs(self.node_values[i], node.value)
+            self.assertIs(node.previous, previous)
+            previous = node
