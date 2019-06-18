@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Container, Iterator, Reversible, Sized
 from typing import Any, List, Optional, Union
 
-from data_structures.linked_list import Node
+from data_structures.linked_list.nodes import Node
 
 
 class SinglyLinkedListIterator(Iterator):

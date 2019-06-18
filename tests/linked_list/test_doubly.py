@@ -2,8 +2,8 @@ from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
-from data_structures.linked_list import DoublyNode
 from data_structures.linked_list.doubly import DoublyLinkedList
+from data_structures.linked_list.nodes import DoublyNode
 
 
 class TestDoublyLinkedList(TestCase):

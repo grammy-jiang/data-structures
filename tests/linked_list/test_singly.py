@@ -2,7 +2,7 @@ from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
-from data_structures.linked_list import Node
+from data_structures.linked_list.nodes import Node
 from data_structures.linked_list.singly import SinglyLinkedList
 
 

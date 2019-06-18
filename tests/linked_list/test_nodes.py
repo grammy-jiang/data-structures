@@ -4,7 +4,7 @@ Test Cases for all Node classes
 from unittest import TestCase
 
 from data_structures.exceptions import NodeFrozenError
-from data_structures.linked_list import DoublyNode, Node, SecureNode
+from data_structures.linked_list.nodes import DoublyNode, Node, SecureNode
 
 
 class TestNode(TestCase):
