@@ -67,6 +67,40 @@ class DoublyLinkedListReversedIterator(DoublyLinkedListIterator):
             raise StopIteration
 
 
+class DoublyLinkedListSearchIterator(DoublyLinkedListIterator):
+    """
+
+    """
+
+    def __init__(self, doubly_linked_list: DoublyLinkedList, value: Any):
+        """
+
+        :param doubly_linked_list:
+        :type doubly_linked_list: SinglyLinkedList
+        :param value:
+        :type value: Any
+        """
+        super().__init__(doubly_linked_list)
+        self.value = value
+
+    def __next__(self) -> DoublyNode:
+        """
+
+        :return:
+        :rtype: Node
+        """
+        while True:
+            current: Optional[DoublyNode] = self.current
+            try:
+                self.current = current.next
+            except AttributeError:  # if the singly linked list is empty
+                raise StopIteration
+            if current.value == self.value:
+                return current
+            if current.next is None:
+                raise StopIteration
+
+
 class DoublyLinkedList(Container, Iterable, Sized):
     def __init__(self, *args):
         """
@@ -189,6 +223,17 @@ class DoublyLinkedList(Container, Iterable, Sized):
                 return node
         else:
             return None
+
+    def search_iter(self, value: Any) -> DoublyLinkedListSearchIterator:
+        """
+        Search for a given value, return a iterator
+
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: Generator[Node, None, None]
+        """
+        return DoublyLinkedListSearchIterator(self, value)
 
     @property
     def tail(self):

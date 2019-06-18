@@ -105,6 +105,22 @@ class TestDoublyLinkedList(TestCase):
         doubly_linked_list = DoublyLinkedList()
         self.assertIsNone(doubly_linked_list.search("d"))
 
+    def test_search_iter(self) -> None:
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+
+        search_iter = doubly_linked_list.search_iter("b")
+        self.assertIsInstance(search_iter, Iterator)
+        self.assertIs(next(search_iter).value, "b")
+
+        search_iter = doubly_linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)
+
+        doubly_linked_list = DoublyLinkedList()
+        search_iter = doubly_linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)
+
     def test_tail(self) -> None:
         doubly_linked_list = DoublyLinkedList(*self.node_values)
         self.assertIs(doubly_linked_list.tail.value, self.node_values[-1])
