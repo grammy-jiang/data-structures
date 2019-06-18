@@ -2,7 +2,7 @@ from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
-from data_structures.linked_list.nodes import Node
+from data_structures.linked_list.nodes import SinglyNode
 from data_structures.linked_list.singly import SinglyLinkedList
 
 
@@ -13,13 +13,13 @@ class TestSinglyLinkedList(TestCase):
     def test_singly_linked_list(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
 
-        node: Optional[Node] = singly_linked_list.head
+        node: Optional[SinglyNode] = singly_linked_list.head
         self.assertIs(node.value, self.node_values[0])
 
-        node: Optional[Node] = node.next
+        node: Optional[SinglyNode] = node.next
         self.assertIs(node.value, self.node_values[1])
 
-        node: Optional[Node] = node.next
+        node: Optional[SinglyNode] = node.next
         self.assertIs(node.value, self.node_values[2])
 
         self.assertIsNone(node.next)
@@ -43,7 +43,7 @@ class TestSinglyLinkedList(TestCase):
         node = singly_linked_list.head
         self.assertIn(node, singly_linked_list)
 
-        node = Node("e")
+        node = SinglyNode("e")
         self.assertNotIn(node, singly_linked_list)
 
     def test_iter(self) -> None:
@@ -93,14 +93,14 @@ class TestSinglyLinkedList(TestCase):
         node_a = singly_linked_list.head
         self.assertTrue(singly_linked_list.is_head(node_a))
 
-        node_f = Node("f")
+        node_f = SinglyNode("f")
         self.assertFalse(singly_linked_list.is_head(node_f))
 
     def test_is_tail(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
-        node_a: Optional[Node] = singly_linked_list.head
-        node_b: Optional[Node] = node_a.next
-        node_c: Optional[Node] = node_b.next
+        node_a: Optional[SinglyNode] = singly_linked_list.head
+        node_b: Optional[SinglyNode] = node_a.next
+        node_c: Optional[SinglyNode] = node_b.next
         self.assertTrue(singly_linked_list.is_tail(node_c))
         self.assertFalse(singly_linked_list.is_tail(node_b))
 
@@ -114,9 +114,9 @@ class TestSinglyLinkedList(TestCase):
 
     def test_remove_after(self) -> None:
         singly_linked_list = SinglyLinkedList(*self.node_values)
-        node_1st: Optional[Node] = singly_linked_list.head
-        node_2nd: Optional[Node] = node_1st.next
-        node_3rd: Optional[Node] = node_2nd.next
+        node_1st: Optional[SinglyNode] = singly_linked_list.head
+        node_2nd: Optional[SinglyNode] = node_1st.next
+        node_3rd: Optional[SinglyNode] = node_2nd.next
         singly_linked_list.remove_after(node_1st)
         self.assertEqual(len(singly_linked_list), len(self.node_values) - 1)
         self.assertIs(node_1st.next, node_3rd)

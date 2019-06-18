@@ -4,7 +4,7 @@ Test Cases for all Node classes
 from unittest import TestCase
 
 from data_structures.exceptions import NodeFrozenError
-from data_structures.linked_list.nodes import DoublyNode, Node, SecureNode
+from data_structures.linked_list.nodes import DoublyNode, SecureSinglyNode, SinglyNode
 
 
 class TestNode(TestCase):
@@ -19,21 +19,21 @@ class TestNode(TestCase):
         """
         Test the initialization of Node class
         """
-        node_a = Node(self.node_value)
+        node_a = SinglyNode(self.node_value)
 
         self.assertIs(node_a.value, self.node_value)
         self.assertIsNone(node_a.next)
 
-        node_b = Node(self.node_value, node_a)
+        node_b = SinglyNode(self.node_value, node_a)
         self.assertIs(node_b.next, node_a)
 
     def test_after_node(self) -> None:
         """
         test the classmethod of Node class
         """
-        node_a = Node(self.node_value)
+        node_a = SinglyNode(self.node_value)
 
-        node_b = Node.after_node(self.node_value, node_a)
+        node_b = SinglyNode.after_node(self.node_value, node_a)
         self.assertIs(node_a.next, node_b)
 
 
@@ -45,31 +45,31 @@ class TestSecureNode(TestCase):
         """
 
         """
-        node_a = SecureNode(self.node_value)
+        node_a = SecureSinglyNode(self.node_value)
 
         self.assertIs(node_a.value, self.node_value)
         self.assertIsNone(node_a.next)
         self.assertTrue(node_a.frozen)
 
-        node_b = SecureNode(self.node_value, node_a)
+        node_b = SecureSinglyNode(self.node_value, node_a)
 
         self.assertIs(node_b.next, node_a)
 
         with self.assertRaises(NodeFrozenError):
-            node_c = SecureNode.after_node(self.node_value, node_a)
+            node_c = SecureSinglyNode.after_node(self.node_value, node_a)
 
     def test_after_node(self) -> None:
         """
         test the classmethod of Node class
         """
-        node_a = SecureNode(self.node_value, frozen=False)
+        node_a = SecureSinglyNode(self.node_value, frozen=False)
 
-        node_b = SecureNode.after_node(self.node_value, node_a)
+        node_b = SecureSinglyNode.after_node(self.node_value, node_a)
         self.assertIs(node_a.next, node_b)
         self.assertTrue(node_b.frozen)
 
     def test_freeze_and_unfreeze(self):
-        node_a = SecureNode(self.node_value)
+        node_a = SecureSinglyNode(self.node_value)
 
         self.assertIsNone(node_a.unfreeze())
         self.assertFalse(node_a.frozen)

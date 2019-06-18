@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Container, Iterator, Reversible, Sized
 from typing import Any, List, Optional, Union
 
-from data_structures.linked_list.nodes import Node
+from data_structures.linked_list.nodes import SinglyNode
 
 
 class SinglyLinkedListIterator(Iterator):
@@ -18,16 +18,16 @@ class SinglyLinkedListIterator(Iterator):
         :type singly_linked_list: SinglyLinkedList
         """
         self.singly_linked_list = singly_linked_list
-        self.current: Optional[Node] = self.singly_linked_list.head
+        self.current: Optional[SinglyNode] = self.singly_linked_list.head
 
-    def __next__(self) -> Node:
+    def __next__(self) -> SinglyNode:
         """
 
         :return:
-        :rtype: Node
+        :rtype: SinglyNode
         """
         if self.current is not None:
-            current: Optional[Node] = self.current
+            current: Optional[SinglyNode] = self.current
             self.current = current.next
             return current
         else:
@@ -48,10 +48,10 @@ class SinglyLinkedListReversedIterator(SinglyLinkedListIterator):
         super(SinglyLinkedListReversedIterator, self).__init__(singly_linked_list)
 
         self._reversed_singly_linked_list: SinglyLinkedList = SinglyLinkedList()
-        _: Optional[Node] = None
-        node: Optional[Node] = None
+        _: Optional[SinglyNode] = None
+        node: Optional[SinglyNode] = None
         for i in self.singly_linked_list:
-            node = Node(i.value)
+            node = SinglyNode(i.value)
             node.next = _
         else:
             self._reversed_singly_linked_list.head = node
@@ -74,14 +74,14 @@ class SinglyLinkedListSearchIterator(SinglyLinkedListIterator):
         super(SinglyLinkedListSearchIterator, self).__init__(singly_linked_list)
         self.value = value
 
-    def __next__(self) -> Node:
+    def __next__(self) -> SinglyNode:
         """
 
         :return:
-        :rtype: Node
+        :rtype: SinglyNode
         """
         while True:
-            current: Optional[Node] = self.current
+            current: Optional[SinglyNode] = self.current
             try:
                 self.current = current.next
             except AttributeError:  # if the singly linked list is empty
@@ -105,13 +105,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
         :param args:
         """
-        self.head: Optional[Node] = None
+        self.head: Optional[SinglyNode] = None
 
         if args:
-            self.head = Node(value=args[0])
+            self.head = SinglyNode(value=args[0])
             current_node = self.head
             for i in args[1:]:
-                current_node = Node.after_node(i, current_node)
+                current_node = SinglyNode.after_node(i, current_node)
 
     def __bool__(self) -> bool:
         """
@@ -121,11 +121,11 @@ class SinglyLinkedList(Container, Reversible, Sized):
         """
         return self.head is not None
 
-    def __contains__(self, node: Node) -> bool:
+    def __contains__(self, node: SinglyNode) -> bool:
         """
 
         :param node:
-        :type node: Node
+        :type node: SinglyNode
         :return:
         :rtype: bool
         """
@@ -171,10 +171,10 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :return:
         :rtype: None
         """
-        _ = Node.after_node(value, self.tail)
+        _ = SinglyNode.after_node(value, self.tail)
 
     def insert_after(
-            self, value: Union[Node, Any], node: Optional[Node] = None
+            self, value: Union[SinglyNode, Any], node: Optional[SinglyNode] = None
     ) -> None:
         """
         If after_node is not provided, the given value will be insert to the beginning
@@ -187,15 +187,15 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :return:
         :rtype: None
         """
-        if not isinstance(value, Node):
-            value = Node(value)
+        if not isinstance(value, SinglyNode):
+            value = SinglyNode(value)
 
         if node:
             value.next, node.next = node.next, value
         else:
             value.next, self.head = self.head, value
 
-    def is_head(self, node: Node) -> bool:
+    def is_head(self, node: SinglyNode) -> bool:
         """
         Check if the given node is the head of this singly linked list
 
@@ -204,14 +204,14 @@ class SinglyLinkedList(Container, Reversible, Sized):
           - Time: Θ(1), Ο(1), Ω(1)
 
         :param node:
-        :type node: Node
+        :type node: SinglyNode
         :return: If the given node is the head of this singly linked list, return True,
                  otherwise False
         :rtype: bool
         """
         return node is self.head
 
-    def is_tail(self, node: Node) -> bool:
+    def is_tail(self, node: SinglyNode) -> bool:
         """
         Check if the given node is the tail of this singly linked list
 
@@ -220,7 +220,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
           - Time: Θ(1), Ο(1), Ω(1)
 
         :param node:
-        :type node: Node
+        :type node: SinglyNode
         :return: If the given node is the tail of this singly linked list, return True,
                  otherwise False
         :rtype: bool
@@ -228,7 +228,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
         return node is self.tail
 
     def pop(self):
-        last_two_nodes: List[Optional[Node], Optional[Node]] = [None, None]
+        last_two_nodes: List[Optional[SinglyNode], Optional[SinglyNode]] = [None, None]
         for node in self:
             last_two_nodes = [last_two_nodes[1], node]
 
@@ -236,7 +236,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
         return last_two_nodes[1]
 
-    def remove_after(self, node: Optional[Node] = None) -> None:
+    def remove_after(self, node: Optional[SinglyNode] = None) -> None:
         """
         Remove one node after the give node
 
@@ -299,13 +299,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :rtype: None
         """
         _ = None
-        node: Optional[Node] = None
+        node: Optional[SinglyNode] = None
         for node in self:
             node.next, _ = _, node
         else:
             self.head = node
 
-    def search(self, value: Any) -> Optional[Node]:
+    def search(self, value: Any) -> Optional[SinglyNode]:
         """
         Search for a given value, return immediately when the first node is found
 
@@ -338,14 +338,14 @@ class SinglyLinkedList(Container, Reversible, Sized):
         """
 
     @tail.getter
-    def tail(self) -> Optional[Node]:
+    def tail(self) -> Optional[SinglyNode]:
         """
         The tail node of this singly linked list
 
         :return:
         :rtype: Optional[Node]
         """
-        node: Optional[Node] = None
+        node: Optional[SinglyNode] = None
         for node in self:
             pass
         else:
