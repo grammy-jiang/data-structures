@@ -130,6 +130,38 @@ class DoublyLinkedList(Container, Iterable, Sized):
         """
         return DoublyLinkedListReversedIterator(self)
 
+    def is_head(self, node: DoublyNode) -> bool:
+        """
+        Check if the given node is the head of this singly linked list
+
+        Complexity:
+          - Space: Θ(1), Ο(1), Ω(1)
+          - Time: Θ(1), Ο(1), Ω(1)
+
+        :param node:
+        :type node: Node
+        :return: If the given node is the head of this singly linked list, return True,
+                 otherwise False
+        :rtype: bool
+        """
+        return node is self.head
+
+    def is_tail(self, node: DoublyNode) -> bool:
+        """
+        Check if the given node is the tail of this singly linked list
+
+        Complexity:
+          - Space: Θ(1), Ο(1), Ω(1)
+          - Time: Θ(1), Ο(1), Ω(1)
+
+        :param node:
+        :type node: Node
+        :return: If the given node is the tail of this singly linked list, return True,
+                 otherwise False
+        :rtype: bool
+        """
+        return node is self.tail
+
     @property
     def tail(self):
         """
