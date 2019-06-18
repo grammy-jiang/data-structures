@@ -80,7 +80,8 @@ class SecureSinglyNode(SinglyNode):
     def next(self) -> Optional[SecureSinglyNode]:
         """
 
-        :return: Optional[SecureSinglyNode]
+        :return:
+        :rtype: Optional[SecureSinglyNode]
         """
         return self._next
 
