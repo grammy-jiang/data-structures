@@ -130,3 +130,22 @@ class DoublyLinkedList(Container, Iterable, Sized):
         """
         return DoublyLinkedListReversedIterator(self)
 
+    @property
+    def tail(self):
+        """
+        Because this property has a getter method, this block is empty
+        """
+
+    @tail.getter
+    def tail(self) -> Optional[DoublyNode]:
+        """
+        The tail node of this singly linked list
+
+        :return:
+        :rtype: Optional[Node]
+        """
+        node: Optional[DoublyNode] = None
+        for node in self:
+            pass
+        else:
+            return node

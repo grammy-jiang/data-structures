@@ -68,3 +68,10 @@ class TestDoublyLinkedList(TestCase):
         self.assertIsInstance(reversed_doubly_linked_list, Iterator)
         for node, i in zip(reversed_doubly_linked_list, reversed(self.node_values)):
             self.assertIs(node.value, i)
+
+    def test_tail(self) -> None:
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+        self.assertIs(doubly_linked_list.tail.value, self.node_values[-1])
+
+        doubly_linked_list = DoublyLinkedList()
+        self.assertIsNone(doubly_linked_list.tail)
