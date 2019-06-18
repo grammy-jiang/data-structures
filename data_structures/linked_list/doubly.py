@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Container, Iterable, Iterator, Sized
-from typing import Optional
+from typing import Any, Optional
 
 from data_structures.linked_list import DoublyNode
 
@@ -161,6 +161,34 @@ class DoublyLinkedList(Container, Iterable, Sized):
         :rtype: bool
         """
         return node is self.tail
+
+    def reverse(self) -> None:
+        """
+        In-place reverse
+
+        :return:
+        :rtype: None
+        """
+        tail = self.tail
+        for node in self:
+            node.next, node.previous = node.previous, node.next
+
+        self.head = tail
+
+    def search(self, value: Any) -> Optional[DoublyNode]:
+        """
+        Search for a given value, return immediately when the first node is found
+
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: Optional[Node]
+        """
+        for node in self:
+            if node.value == value:
+                return node
+        else:
+            return None
 
     @property
     def tail(self):
