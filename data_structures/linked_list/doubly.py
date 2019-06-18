@@ -17,8 +17,8 @@ class DoublyLinkedListIterator(Iterator):
         :param doubly_linked_list:
         :type doubly_linked_list: DoublyLinkedList
         """
-        self.singly_linked_list = doubly_linked_list
-        self.current: Optional[DoublyNode] = self.singly_linked_list.head
+        self.doubly_linked_list = doubly_linked_list
+        self.current: Optional[DoublyNode] = self.doubly_linked_list.head
 
     def __next__(self) -> DoublyNode:
         """
@@ -29,6 +29,39 @@ class DoublyLinkedListIterator(Iterator):
         if self.current is not None:
             current: Optional[DoublyNode] = self.current
             self.current = current.next
+            return current
+        else:
+            raise StopIteration
+
+
+class DoublyLinkedListReversedIterator(DoublyLinkedListIterator):
+    """
+
+    """
+
+    def __init__(self, doubly_linked_list: DoublyLinkedList):
+        """
+
+        :param doubly_linked_list:
+        :type doubly_linked_list: DoublyLinkedList
+        """
+        super().__init__(doubly_linked_list)
+
+        node: Optional[DoublyNode] = None
+        for node in self.doubly_linked_list:
+            pass
+        else:
+            self.current = node
+
+    def __next__(self) -> DoublyNode:
+        """
+
+        :return:
+        :rtype: DoublyNode
+        """
+        if self.current is not None:
+            current: Optional[DoublyNode] = self.current
+            self.current = current.previous
             return current
         else:
             raise StopIteration
@@ -88,3 +121,12 @@ class DoublyLinkedList(Container, Iterable, Sized):
         for _ in self:
             _len += 1
         return _len
+
+    def __reversed__(self) -> DoublyLinkedListReversedIterator:
+        """
+
+        :return:
+        :rtype: DoublyLinkedListReversedIterator
+        """
+        return DoublyLinkedListReversedIterator(self)
+

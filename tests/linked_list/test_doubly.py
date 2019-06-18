@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
@@ -30,20 +31,20 @@ class TestDoublyLinkedList(TestCase):
         self.assertIsNone(doubly_linked_list.head)
 
     def test_bool(self) -> None:
-        singly_linked_list = DoublyLinkedList(*self.node_values)
-        self.assertTrue(bool(singly_linked_list))
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+        self.assertTrue(bool(doubly_linked_list))
 
-        singly_linked_list = DoublyLinkedList()
-        self.assertFalse(bool(singly_linked_list))
+        doubly_linked_list = DoublyLinkedList()
+        self.assertFalse(bool(doubly_linked_list))
 
     def test_contains(self) -> None:
-        singly_linked_list = DoublyLinkedList(*self.node_values)
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
 
-        node = singly_linked_list.head
-        self.assertIn(node, singly_linked_list)
+        node = doubly_linked_list.head
+        self.assertIn(node, doubly_linked_list)
 
         node = DoublyNode("e")
-        self.assertNotIn(node, singly_linked_list)
+        self.assertNotIn(node, doubly_linked_list)
 
     def test_iter(self) -> None:
         doubly_linked_list = DoublyLinkedList(*self.node_values)
@@ -54,8 +55,16 @@ class TestDoublyLinkedList(TestCase):
             previous = node
 
     def test_len(self) -> None:
-        singly_linked_list = DoublyLinkedList(*self.node_values)
-        self.assertEqual(len(singly_linked_list), len(self.node_values))
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+        self.assertEqual(len(doubly_linked_list), len(self.node_values))
 
-        singly_linked_list = DoublyLinkedList()
-        self.assertEqual(len(singly_linked_list), 0)
+        doubly_linked_list = DoublyLinkedList()
+        self.assertEqual(len(doubly_linked_list), 0)
+
+    def test_reserved(self) -> None:
+        doubly_linked_list = DoublyLinkedList(*self.node_values)
+        reversed_doubly_linked_list = reversed(doubly_linked_list)
+
+        self.assertIsInstance(reversed_doubly_linked_list, Iterator)
+        for node, i in zip(reversed_doubly_linked_list, reversed(self.node_values)):
+            self.assertIs(node.value, i)
