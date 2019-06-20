@@ -11,8 +11,12 @@ from data_structures.linked_list import Node as _Node
 
 class SinglyNode(_Node):  # pylint: disable=too-few-public-methods
     """
-    The node used in singly linked list
+    The most simple SinglyNode class, only contains `value` and `next` properties, and
+    there is no any security mechanism for node properties modification
+
+    Any enhanced SinglyNode class should inherit this class
     """
+
     @classmethod
     def after_node(cls, value: Any, node: SinglyNode) -> SinglyNode:
         """
@@ -156,6 +160,7 @@ class DoublyNode(_Node):  # pylint: disable=too-few-public-methods
             next_: Optional[DoublyNode] = None,
     ):
         """
+        Create a node with the given value, previous and next nodes
 
         :param value:
         :type value: Any
