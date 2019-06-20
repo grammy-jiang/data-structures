@@ -18,16 +18,16 @@ class Node(metaclass=ABCMeta):  # pylint: disable=too-few-public-methods
     Any enhanced Node class should inherit this class
     """
 
-    def __init__(self, value: Any, next: Optional[Node] = None):
+    def __init__(self, value: Any, next_: Optional[Node] = None):
         """
 
         :param value:
         :type value: Any
-        :param next:
-        :type next: Optional[Node]
+        :param next_:
+        :type next_: Optional[Node]
         """
         self.value: Any = value
-        self.next: Optional[Node] = next
+        self.next: Optional[Node] = next_
 
     @classmethod
     @abstractmethod

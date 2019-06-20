@@ -35,7 +35,7 @@ class SecureSinglyNode(SinglyNode):
     def __init__(
             self,
             value: Any,
-            next: Optional[SecureSinglyNode] = None,
+            next_: Optional[SecureSinglyNode] = None,
             frozen: bool = True
     ):
         """
@@ -44,8 +44,8 @@ class SecureSinglyNode(SinglyNode):
 
         :param value:
         :type value: Any
-        :param next:
-        :type next: Optional[Node]
+        :param next_:
+        :type next_: Optional[Node]
         :param frozen:
         :type frozen: bool
         """
@@ -53,7 +53,7 @@ class SecureSinglyNode(SinglyNode):
         self._next: Optional[SecureSinglyNode] = None
         self.frozen: bool = False
 
-        super().__init__(value, next)
+        super().__init__(value, next_)
 
         self.frozen: bool = frozen
 
@@ -86,18 +86,18 @@ class SecureSinglyNode(SinglyNode):
         return self._next
 
     @next.setter
-    def next(self, next: SecureSinglyNode) -> None:
+    def next(self, next_: SecureSinglyNode) -> None:
         """
 
-        :param next:
-        :type next: SecureSinglyNode
+        :param next_:
+        :type next_: SecureSinglyNode
         :return:
         :rtype: None
         """
         if self.frozen:
             raise NodeFrozenError
         else:
-            self._next = next
+            self._next = next_
 
     @property
     def value(self) -> Any:
@@ -152,7 +152,7 @@ class DoublyNode(_Node):
             self,
             value: Any,
             previous: Optional[DoublyNode] = None,
-            next: Optional[DoublyNode] = None,
+            next_: Optional[DoublyNode] = None,
     ):
         """
 
@@ -160,18 +160,18 @@ class DoublyNode(_Node):
         :type value: Any
         :param previous:
         :type previous: Optional[DoublyNode]
-        :param next:
-        :type next: Optional[DoublyNode]
+        :param next_:
+        :type next_: Optional[DoublyNode]
         """
-        super().__init__(value, next)
+        super().__init__(value, next_)
 
         self.previous: Optional[DoublyNode] = previous
         if previous:
             previous.next = self
 
-        self.next: Optional[DoublyNode] = next
-        if next:
-            next.previous = self
+        self.next: Optional[DoublyNode] = next_
+        if next_:
+            next_.previous = self
 
     @classmethod
     def after_node(cls, value: Any, node: DoublyNode) -> DoublyNode:
