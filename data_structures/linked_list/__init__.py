@@ -1,10 +1,16 @@
+"""
+This module contains the following linked lists:
+
+ * Singly Linked List
+ * Doubly Linked List
+"""
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
 from typing import Any, Optional
 
 
-class Node(metaclass=ABCMeta):
+class Node(metaclass=ABCMeta):  # pylint: disable=too-few-public-methods
     """
     The most simple Node class, only contains `value` and `next` properties, and there
     is no any security mechanism for node properties modification
@@ -17,6 +23,8 @@ class Node(metaclass=ABCMeta):
 
         :param value:
         :type value: Any
+        :param next:
+        :type next: Optional[Node]
         """
         self.value: Any = value
         self.next: Optional[Node] = next
@@ -34,4 +42,3 @@ class Node(metaclass=ABCMeta):
         :return: The node created
         :rtype: Node
         """
-        pass
