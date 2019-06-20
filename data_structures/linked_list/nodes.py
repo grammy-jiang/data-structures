@@ -9,7 +9,10 @@ from data_structures.exceptions import NodeFrozenError
 from data_structures.linked_list import Node as _Node
 
 
-class SinglyNode(_Node):
+class SinglyNode(_Node):  # pylint: disable=too-few-public-methods
+    """
+    The node used in singly linked list
+    """
     @classmethod
     def after_node(cls, value: Any, node: SinglyNode) -> SinglyNode:
         """
@@ -58,7 +61,7 @@ class SecureSinglyNode(SinglyNode):
         self.frozen: bool = frozen
 
     @classmethod
-    def after_node(
+    def after_node(  # pylint: disable=arguments-differ
             cls, value: Any, node: SecureSinglyNode, frozen: bool = True
     ) -> SecureSinglyNode:
         """
@@ -96,8 +99,7 @@ class SecureSinglyNode(SinglyNode):
         """
         if self.frozen:
             raise NodeFrozenError
-        else:
-            self._next = next_
+        self._next = next_
 
     @property
     def value(self) -> Any:
@@ -118,8 +120,7 @@ class SecureSinglyNode(SinglyNode):
         """
         if self.frozen:
             raise NodeFrozenError
-        else:
-            self._value = value
+        self._value = value
 
     def freeze(self) -> None:
         """
@@ -140,7 +141,7 @@ class SecureSinglyNode(SinglyNode):
         self.frozen = False
 
 
-class DoublyNode(_Node):
+class DoublyNode(_Node):  # pylint: disable=too-few-public-methods
     """
     The most simple DoublyNode class, only contains `value` and `next` properties, and
     there is no any security mechanism for node properties modification
