@@ -127,20 +127,6 @@ class SinglyLinkedList(LinkedList, Reversible):
         """
         return self.head is not None
 
-    def __contains__(self, node: SinglyNode) -> bool:
-        """
-
-        :param node:
-        :type node: SinglyNode
-        :return:
-        :rtype: bool
-        """
-        for _node in self:
-            if node is _node:
-                return True
-
-        return False
-
     def __iter__(self) -> SinglyLinkedListIterator:
         """
 

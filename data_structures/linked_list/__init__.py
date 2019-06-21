@@ -68,7 +68,6 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :rtype: None
         """
 
-    @abstractmethod
     def __contains__(self, item) -> bool:
         """
         Check if the given item exists in this linked list
@@ -77,6 +76,11 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :return:
         :rtype: bool
         """
+        for node in self:
+            if item is node:
+                return True
+
+        return False
 
     @abstractmethod
     def __iter__(self):
