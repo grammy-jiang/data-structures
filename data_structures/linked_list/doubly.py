@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Container, Iterable, Iterator, Sized
+from collections.abc import Iterator, Reversible
 from typing import Any, Optional
 
+from data_structures.linked_list import LinkedList
 from data_structures.linked_list.nodes import DoublyNode
 
 
@@ -101,14 +102,15 @@ class DoublyLinkedListSearchIterator(DoublyLinkedListIterator):
                 raise StopIteration
 
 
-class DoublyLinkedList(Container, Iterable, Sized):
+class DoublyLinkedList(LinkedList, Reversible):
     def __init__(self, *args):
         """
 
         :param args:
         """
-        self.head: Optional[DoublyNode] = None
+        super().__init__(*args)
 
+    def _init(self, *args) -> None:
         if args:
             self.head = DoublyNode(value=args[0])
             current_node = self.head

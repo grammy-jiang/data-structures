@@ -6,9 +6,10 @@ The linked list with only one link property node
 """
 from __future__ import annotations
 
-from collections.abc import Container, Iterator, Reversible, Sized
+from collections.abc import Iterator, Reversible
 from typing import Any, List, Optional, Union
 
+from data_structures.linked_list import LinkedList
 from data_structures.linked_list.nodes import SinglyNode
 
 
@@ -103,7 +104,7 @@ class SinglyLinkedListSearchIterator(  # pylint: disable=too-few-public-methods
                 raise StopIteration
 
 
-class SinglyLinkedList(Container, Reversible, Sized):
+class SinglyLinkedList(LinkedList, Reversible):
     """
     This is the simple singly linked list:
 
@@ -116,8 +117,9 @@ class SinglyLinkedList(Container, Reversible, Sized):
 
         :param args:
         """
-        self.head: Optional[SinglyNode] = None
+        super().__init__(*args)
 
+    def _init(self, *args) -> None:
         if args:
             self.head = SinglyNode(value=args[0])
             current_node = self.head
