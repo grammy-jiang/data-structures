@@ -119,14 +119,6 @@ class SinglyLinkedList(LinkedList, Reversible):
             for i in args[1:]:
                 current_node = SinglyNode.after_node(i, current_node)
 
-    def __bool__(self) -> bool:
-        """
-        if this singly linked list is empty return False, otherwise return True
-        :return:
-        :rtype: bool
-        """
-        return self.head is not None
-
     def __iter__(self) -> SinglyLinkedListIterator:
         """
 

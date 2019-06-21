@@ -68,6 +68,14 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :rtype: None
         """
 
+    def __bool__(self) -> bool:
+        """
+        if this linked list is empty return False, otherwise return True
+        :return:
+        :rtype: bool
+        """
+        return self.head is not None
+
     def __contains__(self, item) -> bool:
         """
         Check if the given item exists in this linked list
