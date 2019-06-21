@@ -32,7 +32,7 @@ class SinglyLinkedListIterator(Iterator):  # pylint: disable=too-few-public-meth
         :return:
         :rtype: SinglyNode
         """
-        if self.cursor is not None:
+        if self.cursor:
             cursor: Optional[SinglyNode] = self.cursor
             self.cursor = cursor.next
             return cursor
@@ -245,7 +245,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :return:
         :rtype: SinglyNode
         """
-        last_two_nodes: List[Optional[SinglyNode], Optional[SinglyNode]] = [None, None]
+        last_two_nodes: List[Optional[SinglyNode]] = [None, None]
         for node in self:
             last_two_nodes = [last_two_nodes[1], node]
 
