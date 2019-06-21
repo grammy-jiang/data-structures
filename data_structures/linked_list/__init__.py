@@ -7,6 +7,7 @@ This module contains the following linked lists:
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
+from collections.abc import Collection
 from typing import Any, Optional
 
 
@@ -41,4 +42,43 @@ class Node(metaclass=ABCMeta):  # pylint: disable=too-few-public-methods
         :type node: Node
         :return: The node created
         :rtype: Node
+        """
+
+
+class LinkedList(Collection, metaclass=ABCMeta):
+    def __init__(self, *args):
+        self.head: Optional[Node] = None
+        self._init(*args)
+
+    @abstractmethod
+    def _init(self, *args) -> None:
+        """
+
+        :param args:
+        :return:
+        :rtype: None
+        """
+
+    @abstractmethod
+    def __contains__(self, item) -> bool:
+        """
+
+        :param item:
+        :return:
+        :rtype: bool
+        """
+
+    @abstractmethod
+    def __iter__(self):
+        """
+
+        :return:
+        """
+
+    @abstractmethod
+    def __len__(self) -> int:
+        """
+
+        :return:
+        :rtype: int
         """
