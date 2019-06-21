@@ -1,3 +1,9 @@
+"""
+The linked list with only one link property node
+
+ * Singly Linked List
+ * Circular Singly Linked List
+"""
 from __future__ import annotations
 
 from collections.abc import Container, Iterator, Reversible, Sized
@@ -6,9 +12,9 @@ from typing import Any, List, Optional, Union
 from data_structures.linked_list.nodes import SinglyNode
 
 
-class SinglyLinkedListIterator(Iterator):
+class SinglyLinkedListIterator(Iterator):  # pylint: disable=too-few-public-methods
     """
-
+    Iterator for Singly Linked List
     """
 
     def __init__(self, singly_linked_list: SinglyLinkedList):
@@ -18,7 +24,7 @@ class SinglyLinkedListIterator(Iterator):
         :type singly_linked_list: SinglyLinkedList
         """
         self.singly_linked_list = singly_linked_list
-        self.current: Optional[SinglyNode] = self.singly_linked_list.head
+        self.cursor: Optional[SinglyNode] = self.singly_linked_list.head
 
     def __next__(self) -> SinglyNode:
         """
@@ -26,17 +32,18 @@ class SinglyLinkedListIterator(Iterator):
         :return:
         :rtype: SinglyNode
         """
-        if self.current is not None:
-            current: Optional[SinglyNode] = self.current
-            self.current = current.next
-            return current
-        else:
-            raise StopIteration
+        if self.cursor is not None:
+            cursor: Optional[SinglyNode] = self.cursor
+            self.cursor = cursor.next
+            return cursor
+        raise StopIteration
 
 
-class SinglyLinkedListReversedIterator(SinglyLinkedListIterator):
+class SinglyLinkedListReversedIterator(  # pylint: disable=too-few-public-methods
+        SinglyLinkedListIterator
+):
     """
-
+    Reversed Iterator for Singly Linked List
     """
 
     def __init__(self, singly_linked_list: SinglyLinkedList):
@@ -48,19 +55,23 @@ class SinglyLinkedListReversedIterator(SinglyLinkedListIterator):
         super(SinglyLinkedListReversedIterator, self).__init__(singly_linked_list)
 
         self._reversed_singly_linked_list: SinglyLinkedList = SinglyLinkedList()
+
         _: Optional[SinglyNode] = None
         node: Optional[SinglyNode] = None
+
         for i in self.singly_linked_list:
             node = SinglyNode(i.value)
             node.next = _
-        else:
-            self._reversed_singly_linked_list.head = node
-            self.current = node
+
+        self._reversed_singly_linked_list.head = node
+        self.cursor = node
 
 
-class SinglyLinkedListSearchIterator(SinglyLinkedListIterator):
+class SinglyLinkedListSearchIterator(  # pylint: disable=too-few-public-methods
+        SinglyLinkedListIterator
+):
     """
-
+    Search Iterator for Singly Linked List
     """
 
     def __init__(self, singly_linked_list: SinglyLinkedList, value: Any):
@@ -81,9 +92,9 @@ class SinglyLinkedListSearchIterator(SinglyLinkedListIterator):
         :rtype: SinglyNode
         """
         while True:
-            current: Optional[SinglyNode] = self.current
+            current: Optional[SinglyNode] = self.cursor
             try:
-                self.current = current.next
+                self.cursor = current.next
             except AttributeError:  # if the singly linked list is empty
                 raise StopIteration
             if current.value == self.value:
@@ -132,8 +143,8 @@ class SinglyLinkedList(Container, Reversible, Sized):
         for _node in self:
             if node is _node:
                 return True
-        else:
-            return False
+
+        return False
 
     def __iter__(self) -> SinglyLinkedListIterator:
         """
@@ -227,7 +238,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
         """
         return node is self.tail
 
-    def pop(self):
+    def pop(self) -> SinglyNode:
+        """
+        Pop the last node of this singly linked list
+
+        :return:
+        :rtype: SinglyNode
+        """
         last_two_nodes: List[Optional[SinglyNode], Optional[SinglyNode]] = [None, None]
         for node in self:
             last_two_nodes = [last_two_nodes[1], node]
@@ -247,22 +264,21 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :return:
         :rtype: None
         """
-        if not len(self):  # for empty linked list nothing happens
+        if not self:  # for empty linked list nothing happens
             return
 
         if node is None:  # remove the first node
             self.head = self.head.next
         else:
-            for n in self:
-                if node is n:
+            for node_ in self:
+                if node is node_:
                     if node.next is None:
                         # the give node is the last node in singly linked list, nothing
                         # is removed
                         return
-                    else:
-                        node.next = node.next.next
+                    node.next = node.next.next
 
-    def replace(self, old: Any, new: Any, max: Optional[int] = None) -> None:
+    def replace(self, old: Any, new: Any, max_: Optional[int] = None) -> None:
         """
         In-place replace the node old value with the given new one
 
@@ -274,22 +290,22 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :type old: Any
         :param new: The new value to replace the old one
         :type new: Any
-        :param max: if max is not provided all of nodes equaled to old will be changed to new
-        :type max: Optional[int]
+        :param max_: if max is not provided all of nodes equaled to old will be changed to new
+        :type max_: Optional[int]
         :return: This method is a in-place change and returns None
         :rtype: None
         """
         for node in self:
-            if max == 0:
+            if max_ == 0:
                 break
 
             if node.value == old:
                 node.value = new
 
-            if max is None:
+            if max_ is None:
                 continue
             else:
-                max -= 1
+                max_ -= 1
 
     def reverse(self) -> None:
         """
@@ -298,12 +314,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :return:
         :rtype: None
         """
-        _ = None
+        _: Optional[SinglyNode] = None
         node: Optional[SinglyNode] = None
+
         for node in self:
             node.next, _ = _, node
-        else:
-            self.head = node
+
+        self.head = node
 
     def search(self, value: Any) -> Optional[SinglyNode]:
         """
@@ -312,13 +329,13 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :param value:
         :type value: Any
         :return:
-        :rtype: Optional[Node]
+        :rtype: Optional[SinglyNode]
         """
         for node in self:
             if node.value == value:
                 return node
-        else:
-            return None
+
+        return None
 
     def search_iter(self, value: Any) -> SinglyLinkedListSearchIterator:
         """
@@ -327,7 +344,7 @@ class SinglyLinkedList(Container, Reversible, Sized):
         :param value:
         :type value: Any
         :return:
-        :rtype: Generator[Node, None, None]
+        :rtype: Iterator
         """
         return SinglyLinkedListSearchIterator(self, value)
 
@@ -343,10 +360,11 @@ class SinglyLinkedList(Container, Reversible, Sized):
         The tail node of this singly linked list
 
         :return:
-        :rtype: Optional[Node]
+        :rtype: Optional[SinglyNode]
         """
         node: Optional[SinglyNode] = None
+
         for node in self:
             pass
-        else:
-            return node
+
+        return node
