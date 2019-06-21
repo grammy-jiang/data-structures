@@ -116,3 +116,18 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
 
         :return:
         """
+
+    @property
+    def tail(self) -> Optional[Node]:
+        """
+        The tail node of this singly linked list
+
+        :return:
+        :rtype: Optional[Node}
+        """
+        node: Optional[Node] = None
+
+        for node in self:
+            pass
+
+        return node

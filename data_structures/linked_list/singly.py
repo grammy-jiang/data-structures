@@ -310,23 +310,4 @@ class SinglyLinkedList(LinkedList, Reversible):
         """
         return SinglyLinkedListSearchIterator(self, value)
 
-    @property
-    def tail(self):
-        """
-        Because this property has a getter method, this block is empty
-        """
 
-    @tail.getter
-    def tail(self) -> Optional[SinglyNode]:
-        """
-        The tail node of this singly linked list
-
-        :return:
-        :rtype: Optional[SinglyNode]
-        """
-        node: Optional[SinglyNode] = None
-
-        for node in self:
-            pass
-
-        return node
