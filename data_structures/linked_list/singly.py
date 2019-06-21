@@ -135,17 +135,6 @@ class SinglyLinkedList(LinkedList, Reversible):
         """
         return SinglyLinkedListIterator(self)
 
-    def __len__(self) -> int:
-        """
-
-        :return:
-        :rtype: int
-        """
-        _len = 0
-        for _ in self:
-            _len += 1
-        return _len
-
     def __reversed__(self) -> SinglyLinkedListReversedIterator:
         """
 

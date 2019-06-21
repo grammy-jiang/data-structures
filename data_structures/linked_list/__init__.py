@@ -89,7 +89,6 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :return:
         """
 
-    @abstractmethod
     def __len__(self) -> int:
         """
         Return the length of this linked list
@@ -97,6 +96,10 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :return:
         :rtype: int
         """
+        length = 0
+        for _ in self:
+            length += 1
+        return length
 
     @abstractmethod
     def __reversed__(self):
