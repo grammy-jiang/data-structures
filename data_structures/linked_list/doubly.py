@@ -103,13 +103,6 @@ class DoublyLinkedListSearchIterator(DoublyLinkedListIterator):
 
 
 class DoublyLinkedList(LinkedList, Reversible):
-    def __init__(self, *args):
-        """
-
-        :param args:
-        """
-        super().__init__(*args)
-
     def _init(self, *args) -> None:
         if args:
             self.head = DoublyNode(value=args[0])

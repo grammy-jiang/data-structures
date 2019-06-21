@@ -112,13 +112,6 @@ class SinglyLinkedList(LinkedList, Reversible):
 
     """
 
-    def __init__(self, *args):
-        """
-
-        :param args:
-        """
-        super().__init__(*args)
-
     def _init(self, *args) -> None:
         if args:
             self.head = SinglyNode(value=args[0])
