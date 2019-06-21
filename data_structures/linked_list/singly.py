@@ -168,38 +168,6 @@ class SinglyLinkedList(LinkedList, Reversible):
         else:
             value.next, self.head = self.head, value
 
-    def is_head(self, node: SinglyNode) -> bool:
-        """
-        Check if the given node is the head of this singly linked list
-
-        Complexity:
-          - Space: Θ(1), Ο(1), Ω(1)
-          - Time: Θ(1), Ο(1), Ω(1)
-
-        :param node:
-        :type node: SinglyNode
-        :return: If the given node is the head of this singly linked list, return True,
-                 otherwise False
-        :rtype: bool
-        """
-        return node is self.head
-
-    def is_tail(self, node: SinglyNode) -> bool:
-        """
-        Check if the given node is the tail of this singly linked list
-
-        Complexity:
-          - Space: Θ(1), Ο(1), Ω(1)
-          - Time: Θ(1), Ο(1), Ω(1)
-
-        :param node:
-        :type node: SinglyNode
-        :return: If the given node is the tail of this singly linked list, return True,
-                 otherwise False
-        :rtype: bool
-        """
-        return node is self.tail
-
     def pop(self) -> SinglyNode:
         """
         Pop the last node of this singly linked list
