@@ -7,7 +7,7 @@ This module contains the following linked lists:
 from __future__ import annotations
 
 from abc import ABCMeta, abstractmethod
-from collections.abc import Collection
+from collections.abc import Collection, Reversible
 from typing import Any, Optional
 
 
@@ -45,14 +45,23 @@ class Node(metaclass=ABCMeta):  # pylint: disable=too-few-public-methods
         """
 
 
-class LinkedList(Collection, metaclass=ABCMeta):
+class LinkedList(Collection, Reversible, metaclass=ABCMeta):
+    """
+    The abstract class of Linked List
+    """
+
     def __init__(self, *args):
+        """
+
+        :param args:
+        """
         self.head: Optional[Node] = None
         self._init(*args)
 
     @abstractmethod
     def _init(self, *args) -> None:
         """
+        Initial this linked list with the given arguments
 
         :param args:
         :return:
@@ -62,6 +71,7 @@ class LinkedList(Collection, metaclass=ABCMeta):
     @abstractmethod
     def __contains__(self, item) -> bool:
         """
+        Check if the given item exists in this linked list
 
         :param item:
         :return:
@@ -71,14 +81,23 @@ class LinkedList(Collection, metaclass=ABCMeta):
     @abstractmethod
     def __iter__(self):
         """
-
+        Return an iterator of this linked list
         :return:
         """
 
     @abstractmethod
     def __len__(self) -> int:
         """
+        Return the length of this linked list
 
         :return:
         :rtype: int
+        """
+
+    @abstractmethod
+    def __reversed__(self):
+        """
+        Return an reversed iterator of this linked list
+
+        :return:
         """
