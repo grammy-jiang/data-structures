@@ -163,3 +163,10 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :rtype: bool
         """
         return node is self.tail
+
+    @abstractmethod
+    def reverse(self) -> None:
+        """
+
+        :return:
+        """
