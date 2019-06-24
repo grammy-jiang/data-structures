@@ -13,3 +13,9 @@ class NodeFrozenError(DataStructureError):
     """
     When a property of a frozen node is attempted to modify, this exception raises
     """
+
+
+class LinkedListIndexError(DataStructureError):
+    """
+    When visit or remove the node not in the linked list, this exception raises
+    """
