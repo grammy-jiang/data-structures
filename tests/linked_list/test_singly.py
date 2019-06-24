@@ -327,6 +327,36 @@ class TestCircularSinglyLinkedList(TestCase):
         for node, i in zip(linked_list, reversed(self.node_values)):
             self.assertIs(node.value, i)
 
+    def test_search(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        b = self.node_values[1]
+
+        result = linked_list.search(b)
+        self.assertIsInstance(result, SinglyNode)
+        self.assertIs(result.value, b)
+
+        self.assertIsNone(linked_list.search("d"))
+
+        linked_list = SinglyLinkedList()
+        self.assertIsNone(linked_list.search("d"))
+
+    def test_search_iter(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        search_iter = linked_list.search_iter("b")
+        self.assertIsInstance(search_iter, Iterator)
+        self.assertIs(next(search_iter).value, "b")
+
+        search_iter = linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)
+
+        linked_list = SinglyLinkedList()
+        search_iter = linked_list.search_iter("d")
+        with self.assertRaises(StopIteration):
+            _ = next(search_iter)
+
     def test_tail(self) -> None:
         linked_list = CircularSinglyLinkedList(*self.node_values)
         head = linked_list.head

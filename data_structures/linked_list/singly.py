@@ -341,6 +341,19 @@ class CircularSinglyLinkedListReversedIterator(Iterator):
             return node.value
 
 
+class CircularSinglyLinkedListSearchIterator(Iterator):
+    def __init__(self, circular_singly_linked_list: CircularSinglyLinkedList, value: Any):
+        self.circular_singly_linked_list = circular_singly_linked_list
+        self.value = value
+        self.iter_circular_singly_linked_list = iter(self.circular_singly_linked_list)
+
+    def __next__(self) -> SinglyNode:
+        while True:
+            node = next(self.iter_circular_singly_linked_list)
+            if node.value == self.value:
+                return node
+
+
 class CircularSinglyLinkedList(LinkedList):
     """
 
@@ -411,4 +424,4 @@ class CircularSinglyLinkedList(LinkedList):
         self.head.next, self.head = node, node
 
     def search_iter(self, value: Any):
-        pass
+        return CircularSinglyLinkedListSearchIterator(self, value)
