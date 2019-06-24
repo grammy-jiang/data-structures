@@ -132,6 +132,15 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
 
         return node
 
+    def append(self, value: Any) -> None:
+        """
+
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: None
+        """
+
     def is_head(self, node: Node) -> bool:
         """
         Check if the given node is the head of this singly linked list
@@ -163,6 +172,13 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :rtype: bool
         """
         return node is self.tail
+
+    def pop(self) -> Optional[Node]:
+        """
+
+        :return:
+        :rtype: Optional[Node]
+        """
 
     @abstractmethod
     def reverse(self) -> None:
