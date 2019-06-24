@@ -161,21 +161,6 @@ class DoublyLinkedList(LinkedList, Reversible):
 
         self.head = tail
 
-    def search(self, value: Any) -> Optional[DoublyNode]:
-        """
-        Search for a given value, return immediately when the first node is found
-
-        :param value:
-        :type value: Any
-        :return:
-        :rtype: Optional[Node]
-        """
-        for node in self:
-            if node.value == value:
-                return node
-        else:
-            return None
-
     def search_iter(self, value: Any) -> DoublyLinkedListSearchIterator:
         """
         Search for a given value, return a iterator

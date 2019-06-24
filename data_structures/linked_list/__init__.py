@@ -190,15 +190,21 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         :return:
         """
 
-    @abstractmethod
     def search(self, value: Any) -> Optional[Node]:
         """
+        Search for a given value, return immediately when the first node is found
 
         :param value:
         :type value: Any
         :return:
         :rtype: Optional[Node]
         """
+
+        for node in self:
+            if node.value == value:
+                return node
+
+        return None
 
     @abstractmethod
     def search_iter(self, value: Any):

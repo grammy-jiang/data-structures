@@ -253,21 +253,6 @@ class SinglyLinkedList(LinkedList, Reversible):
 
         self.head = node
 
-    def search(self, value: Any) -> Optional[SinglyNode]:
-        """
-        Search for a given value, return immediately when the first node is found
-
-        :param value:
-        :type value: Any
-        :return:
-        :rtype: Optional[SinglyNode]
-        """
-        for node in self:
-            if node.value == value:
-                return node
-
-        return None
-
     def search_iter(self, value: Any) -> SinglyLinkedListSearchIterator:
         """
         Search for a given value, return a iterator
@@ -424,3 +409,6 @@ class CircularSinglyLinkedList(LinkedList):
             node.next, _ = _, node
 
         self.head.next, self.head = node, node
+
+    def search_iter(self, value: Any):
+        pass
