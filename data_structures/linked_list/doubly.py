@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator, Reversible
 from typing import Any, Optional
 
+from data_structures.exceptions import LinkedListIndexError
 from data_structures.linked_list import LinkedList
 from data_structures.linked_list.nodes import DoublyNode
 
@@ -125,6 +126,27 @@ class DoublyLinkedList(LinkedList, Reversible):
         :rtype: DoublyLinkedListReversedIterator
         """
         return DoublyLinkedListReversedIterator(self)
+
+    def append(self, value: Any) -> None:
+        if self:
+            DoublyNode.after_node(value, self.tail)
+        else:
+            self.head = DoublyNode(value)
+
+    def pop(self) -> Optional[DoublyNode]:
+        if not self:  # this doubly linked list is empty
+            raise LinkedListIndexError
+        elif len(self) == 1:
+            node = self.head
+            self.head = None
+            return node
+        else:
+            tail = self.tail
+
+            new_tail = tail.previous
+            new_tail.next = None
+
+            return tail
 
     def reverse(self) -> None:
         """

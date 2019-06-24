@@ -2,6 +2,7 @@ from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
+from data_structures.exceptions import LinkedListIndexError
 from data_structures.linked_list.doubly import DoublyLinkedList
 from data_structures.linked_list.nodes import DoublyNode
 
@@ -69,6 +70,23 @@ class TestDoublyLinkedList(TestCase):
         for node, i in zip(reversed_doubly_linked_list, reversed(self.node_values)):
             self.assertIs(node.value, i)
 
+    def test_append(self) -> None:
+        linked_list = DoublyLinkedList(*self.node_values)
+
+        orig_tail = linked_list.tail
+
+        linked_list.append("d")
+
+        self.assertIs(linked_list.tail.value, "d")
+        self.assertIs(orig_tail.next, linked_list.tail)
+        self.assertIs(linked_list.tail.previous, orig_tail)
+        self.assertIsNone(linked_list.tail.next)
+
+        linked_list = DoublyLinkedList()
+
+        linked_list.append("d")
+        self.assertIs(linked_list.tail.value, "d")
+
     def test_is_head(self) -> None:
         doubly_linked_list = DoublyLinkedList(*self.node_values)
 
@@ -85,6 +103,34 @@ class TestDoublyLinkedList(TestCase):
         node_c: Optional[DoublyNode] = node_b.next
         self.assertTrue(doubly_linked_list.is_tail(node_c))
         self.assertFalse(doubly_linked_list.is_tail(node_b))
+
+    def test_pop(self) -> None:
+        linked_list = DoublyLinkedList(*self.node_values)
+
+        tail = linked_list.tail
+        previous_tail = tail.previous
+
+        node = linked_list.pop()
+
+        self.assertIs(tail, node)
+        self.assertIs(tail.previous, previous_tail)
+        self.assertIsNone(tail.next)
+
+        self.assertIsNone(previous_tail.next)
+
+        linked_list = DoublyLinkedList("a")
+
+        node = linked_list.pop()
+
+        self.assertIs(node.value, "a")
+        self.assertIsNone(node.next)
+        self.assertIsNone(node.previous)
+        self.assertIsNone(linked_list.head)
+
+        linked_list = DoublyLinkedList()
+
+        with self.assertRaises(LinkedListIndexError):
+            _ = linked_list.pop()
 
     def test_reverse(self) -> None:
         doubly_linked_list = DoublyLinkedList(*self.node_values)
