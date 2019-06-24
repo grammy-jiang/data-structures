@@ -94,6 +94,7 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
     def __iter__(self):
         """
         Return an iterator of this linked list
+
         :return:
         """
 
@@ -186,5 +187,24 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
     def reverse(self) -> None:
         """
 
+        :return:
+        """
+
+    @abstractmethod
+    def search(self, value: Any) -> Optional[Node]:
+        """
+
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: Optional[Node]
+        """
+
+    @abstractmethod
+    def search_iter(self, value: Any):
+        """
+
+        :param value:
+        :type value: Any
         :return:
         """
