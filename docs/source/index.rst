@@ -12,6 +12,7 @@ Welcome to Python Data Structures's documentation!
 
    linked_list/nodes
    linked_list/singly
+   linked_list/doubly
 
 Indices and tables
 ==================

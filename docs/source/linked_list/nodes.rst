@@ -1,8 +1,8 @@
-.. _linked_list-node:
+.. _linked_list-nodes:
 
-====
-Node
-====
+=====
+Nodes
+=====
 
 .. autoclass:: data_structures.linked_list.Node
     :members:
