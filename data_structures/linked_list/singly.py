@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections.abc import Iterator, Reversible
 from typing import Any, List, Optional, Union
 
+from data_structures.exceptions import LinkedListIndexError
 from data_structures.linked_list import LinkedList
 from data_structures.linked_list.nodes import SinglyNode
 
@@ -279,3 +280,147 @@ class SinglyLinkedList(LinkedList, Reversible):
         return SinglyLinkedListSearchIterator(self, value)
 
 
+class CircularSinglyLinkedListIterator(Iterator):
+    """
+
+    """
+
+    def __init__(self, circular_singly_linked_list: CircularSinglyLinkedList):
+        """
+
+        :param circular_singly_linked_list:
+        """
+        self.circular_singly_linked_list = circular_singly_linked_list
+
+        self.head = self.circular_singly_linked_list.head
+        self.cursor = self.head
+
+        self._stop_iteration: bool = False if self.head else True
+
+    def __next__(self) -> SinglyNode:
+        """
+
+        :return:
+        """
+
+        if self._stop_iteration:
+            raise StopIteration
+        else:
+            cursor = self.cursor
+            self.cursor = cursor.next
+
+            if cursor.next is self.head:
+                self._stop_iteration = True
+
+            return cursor
+
+
+class CircularSinglyLinkedListReversedIterator(Iterator):
+    """
+    An reversed iterator of CircularSinglyLinkedList
+    """
+
+    # TODO: this class needs to improve the code quality
+
+    def __init__(self, circular_singly_linked_list: CircularSinglyLinkedList):
+        """
+
+        :param circular_singly_linked_list:
+        :type circular_singly_linked_list: CircularSinglyLinkedList
+        """
+
+        _: Optional[SinglyNode] = None
+        node: Optional[SinglyNode] = None
+
+        for i in circular_singly_linked_list:
+            node = SinglyNode(i)
+            node.next, _ = _, node
+
+        self.linked_list = CircularSinglyLinkedList()
+        self.linked_list.head = node
+
+        self.iter_linked_list = iter(self.linked_list)
+
+    def __next__(self) -> SinglyNode:
+        """
+
+        :return:
+        :rtype: SinglyNode
+        """
+
+        try:
+            node = next(self.iter_linked_list)
+        except AttributeError:
+            raise StopIteration
+        else:
+            return node.value
+
+
+class CircularSinglyLinkedList(LinkedList):
+    """
+
+    """
+
+    def _init(self, *args) -> None:
+        if args:
+            self.head = SinglyNode(value=args[0])
+            current_node = self.head
+            for i in args[1:]:
+                current_node = SinglyNode.after_node(i, current_node)
+            current_node.next = self.head
+
+    def __iter__(self) -> CircularSinglyLinkedListIterator:
+        return CircularSinglyLinkedListIterator(self)
+
+    def __reversed__(self) -> CircularSinglyLinkedListReversedIterator:
+        return CircularSinglyLinkedListReversedIterator(self)
+
+    def append(self, value: Any) -> None:
+        """
+
+        :param value:
+        :type value: Any
+        :return:
+        :rtype: None
+        """
+        if self:  # check this circular linked list is empty or not
+            SinglyNode.after_node(value, self.tail).next = self.head
+        else:
+            self.head = SinglyNode(value)
+            self.head.next = self.head
+
+    def pop(self) -> SinglyNode:
+        """
+
+        :return:
+        :rtype: SinglyNode
+        """
+        if not self:  # check the circular linked list is emtpy or not
+            raise LinkedListIndexError
+        elif len(self) == 1:
+            node = self.head
+            self.head = None
+            return node
+        else:
+            last_two_nodes: List[Optional[SinglyNode]] = [None, None]
+            for node in self:
+                last_two_nodes = [last_two_nodes[1], node]
+
+            last_two_nodes[0].next = self.head
+
+            return last_two_nodes[1]
+
+    def reverse(self) -> None:
+        """
+        In-place reverse
+
+        :return:
+        :rtype: None
+        """
+        _: Optional[SinglyNode] = None
+        node: Optional[SinglyNode] = None
+
+        for node in self:
+            node.next, _ = _, node
+
+        self.head.next, self.head = node, node

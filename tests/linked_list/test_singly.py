@@ -2,8 +2,12 @@ from collections.abc import Iterator
 from typing import Optional
 from unittest import TestCase
 
+from data_structures.exceptions import LinkedListIndexError
 from data_structures.linked_list.nodes import SinglyNode
-from data_structures.linked_list.singly import SinglyLinkedList
+from data_structures.linked_list.singly import (
+    CircularSinglyLinkedList,
+    SinglyLinkedList,
+)
 
 
 class TestSinglyLinkedList(TestCase):
@@ -194,3 +198,141 @@ class TestSinglyLinkedList(TestCase):
 
         singly_linked_list = SinglyLinkedList()
         self.assertIsNone(singly_linked_list.tail)
+
+
+class TestCircularSinglyLinkedList(TestCase):
+    def setUp(self) -> None:
+        self.node_values = ["a", "b", "c"]
+
+    def test_circular_singly_linked_list(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        head: Optional[SinglyNode] = linked_list.head
+        self.assertIs(head.value, self.node_values[0])
+
+        node: Optional[SinglyNode] = head.next
+        self.assertIs(node.value, self.node_values[1])
+
+        node: Optional[SinglyNode] = node.next
+        self.assertIs(node.value, self.node_values[2])
+
+        self.assertIs(node.next, head)
+
+        linked_list = CircularSinglyLinkedList()
+        self.assertIsNone(linked_list.head)
+        self.assertIsNone(linked_list.tail)
+
+        with self.assertRaises(AttributeError):
+            _ = linked_list.head.next
+        with self.assertRaises(AttributeError):
+            _ = linked_list.tail.next
+
+    def test_bool(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        self.assertTrue(bool(linked_list))
+
+        linked_list = CircularSinglyLinkedList()
+        self.assertFalse(bool(linked_list))
+
+    def test_contains(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        node = linked_list.head
+        self.assertIn(node, linked_list)
+
+        node = SinglyNode("e")
+        self.assertNotIn(node, linked_list)
+
+        linked_list = CircularSinglyLinkedList()
+
+        node = SinglyNode("e")
+        self.assertNotIn(node, linked_list)
+
+    def test_iter(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        for i, node in enumerate(linked_list):
+            self.assertIs(self.node_values[i], node.value)
+
+        linked_list = CircularSinglyLinkedList()
+        iter_linked_list = iter(linked_list)
+
+        with self.assertRaises(StopIteration):
+            next(iter_linked_list)
+
+    def test_len(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        self.assertEqual(len(linked_list), len(self.node_values))
+
+        linked_list = CircularSinglyLinkedList()
+        self.assertEqual(len(linked_list), 0)
+
+    def test_reserved(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        iter_reversed_linked_list = reversed(linked_list)
+
+        self.assertIsInstance(iter_reversed_linked_list, Iterator)
+        for node, i in zip(iter_reversed_linked_list, reversed(self.node_values)):
+            self.assertIs(node.value, i)
+
+    def test_append(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        head = linked_list.head
+
+        self.assertIsNone(linked_list.append("d"))
+        self.assertEqual(len(linked_list), len(self.node_values) + 1)
+
+        tail = linked_list.tail
+        self.assertIs(tail.value, "d")
+        self.assertIs(tail.next, head)
+
+        linked_list = CircularSinglyLinkedList()
+
+        self.assertIsNone(linked_list.append("d"))
+        self.assertEqual(len(linked_list), 1)
+
+        head = linked_list.head
+        tail = linked_list.tail
+        self.assertIs(tail.value, "d")
+        self.assertIs(tail.next, head)
+
+    def test_pop(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+
+        tail = linked_list.tail
+
+        node = linked_list.pop()  # return "c" node
+
+        self.assertIs(node, tail)
+        self.assertFalse(linked_list.is_tail(node))
+        self.assertEqual(len(linked_list), len(self.node_values) - 1)
+
+        tail = linked_list.tail
+
+        self.assertIs(tail.value, self.node_values[-2])
+        self.assertIs(tail.next, linked_list.head)
+
+        _ = linked_list.pop()  # return "b" node
+
+        _ = linked_list.pop()  # return "a" node, and linked_list is empty
+
+        self.assertIsNone(linked_list.head)
+        with self.assertRaises(LinkedListIndexError):
+            linked_list.pop()
+
+    def test_reverse(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        self.assertIsNone(linked_list.reverse())
+
+        for node, i in zip(linked_list, reversed(self.node_values)):
+            self.assertIs(node.value, i)
+
+    def test_tail(self) -> None:
+        linked_list = CircularSinglyLinkedList(*self.node_values)
+        head = linked_list.head
+        tail = linked_list.tail
+        self.assertIs(tail.value, self.node_values[-1])
+        self.assertIs(tail.next, head)
+
+        linked_list = SinglyLinkedList()
+        self.assertIsNone(linked_list.tail)
