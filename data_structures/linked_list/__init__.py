@@ -132,6 +132,7 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
 
         return node
 
+    @abstractmethod
     def append(self, value: Any) -> None:
         """
 
@@ -173,6 +174,7 @@ class LinkedList(Collection, Reversible, metaclass=ABCMeta):
         """
         return node is self.tail
 
+    @abstractmethod
     def pop(self) -> Optional[Node]:
         """
 
