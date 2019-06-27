@@ -26,23 +26,23 @@ class LinkedListIndexError(DataStructureError):
 
 class BinaryNodeError(DataStructureError):
     """
-
+    The base exception for BinaryNode
     """
 
 
 class BinaryNodeRelationshipError(BinaryNodeError):
     """
-
+    When a parent-child relationship is invalidated, this exception raises
     """
 
 
 class BinaryNodeRelationshipExistedError(BinaryNodeError):
     """
-
+    When a parent-child relationship already exists, this exception raises
     """
 
 
 class BinaryNodeChildNotExistedError(BinaryNodeError):
     """
-
+    When visit a not existed child of a BinaryNode, this exception raises
     """
