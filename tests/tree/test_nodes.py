@@ -162,3 +162,22 @@ class TestBinaryNode(TestCase):
 
         self.assertTrue(node_b.is_sibling(node_c))
         self.assertFalse(node_d.is_sibling(node_c))
+
+    def test_remove_child(self) -> None:
+        """
+
+        :return:
+        """
+
+        node_a = BinaryNode(self.value_a)
+        node_b = BinaryNode(self.value_b, node_a, "left_child")
+        node_c = BinaryNode(self.value_c, node_a, "right_child")
+        node_d = BinaryNode(self.value_d, node_b, "left_child")
+
+        self.assertIsNone(node_b.remove_child("left_child"))
+
+        with self.assertRaises(BinaryNodeChildNotExistedError):
+            _ = node_b.left_child
+
+        with self.assertRaises(BinaryNodeRelationshipError):
+            node_b.remove_child("left")

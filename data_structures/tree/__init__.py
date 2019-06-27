@@ -112,3 +112,13 @@ class Node(metaclass=ABCMeta):
         :rtype: bool
         """
         return node in self.parent.children
+
+    @abstractmethod
+    def remove_child(self, relationship: str):
+        """
+
+        :param relationship:
+        :type relationship:
+        :return:
+        :rtype:
+        """

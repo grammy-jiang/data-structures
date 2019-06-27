@@ -114,3 +114,17 @@ class BinaryNode(Node):
         """
 
         return self._left_child is None and self._right_child is None
+
+    def remove_child(self, relationship: str) -> None:
+        """
+
+        :param relationship:
+        :type relationship: str
+        :return:
+        :rtype: None
+        """
+
+        if relationship not in RELATIONSHIP:
+            raise BinaryNodeRelationshipError
+
+        setattr(self, "_" + relationship, None)
