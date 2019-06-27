@@ -19,3 +19,30 @@ class LinkedListIndexError(DataStructureError):
     """
     When visit or remove the node not in the linked list, this exception raises
     """
+
+
+# BinaryNode used in BinaryTree
+
+
+class BinaryNodeError(DataStructureError):
+    """
+
+    """
+
+
+class BinaryNodeRelationshipError(BinaryNodeError):
+    """
+
+    """
+
+
+class BinaryNodeRelationshipExistedError(BinaryNodeError):
+    """
+
+    """
+
+
+class BinaryNodeChildNotExistedError(BinaryNodeError):
+    """
+
+    """
