@@ -394,3 +394,4 @@ Mkfile.old
 dkms.conf
 
 .pyre/
+.pytype/
